@@ -1,0 +1,46 @@
+global:
+  seed: 42
+  deterministic: true
+  request_timeout_s: 120
+  weight_learning_rate: 0.2
+
+agents:
+  - id: agent_llama3
+    host: 172.16.185.209
+    port: 11434
+    model: llama3.2:3b
+    temperature: 0.2
+    max_tokens: 256
+    base_weight: 1.0
+    topic_tags: [general, reasoning, factual]
+    enabled: true
+
+  - id: agent_mistral
+    host: 172.16.185.218
+    port: 11434
+    model: qwen2.5:3b
+    temperature: 0.2
+    max_tokens: 256
+    base_weight: 1.0
+    topic_tags: [general, science, reasoning]
+    enabled: true
+
+  - id: agent_phi3
+    host: 172.16.185.220
+    port: 11434
+    model: phi3:mini
+    temperature: 0.2
+    max_tokens: 256
+    base_weight: 0.9
+    topic_tags: [general, coding, math]
+    enabled: true
+
+  - id: agent_gemma
+    host: 172.16.185.222
+    port: 11434
+    model: gemma2:2b
+    temperature: 0.2
+    max_tokens: 256
+    base_weight: 1.0
+    topic_tags: [general, factual, science]
+    enabled: true

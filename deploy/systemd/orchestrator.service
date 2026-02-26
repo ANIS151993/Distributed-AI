@@ -1,0 +1,19 @@
+[Unit]
+Description=Distributed AI Orchestrator (FastAPI)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__SERVICE_USER__
+WorkingDirectory=__PROJECT_DIR__
+Environment="AGENT_CONFIG=__PROJECT_DIR__/agents/agent_config.yaml"
+Environment="WEIGHTS_PATH=__PROJECT_DIR__/logs/agent_weights.json"
+Environment="QUERY_LOG_PATH=__PROJECT_DIR__/logs/query_metrics.jsonl"
+Environment="PYTHONUNBUFFERED=1"
+ExecStart=__PROJECT_DIR__/.venv/bin/uvicorn orchestrator.main:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,98 @@
+version: "3.9"
+
+services:
+  orchestrator:
+    build: .
+    container_name: distributed-orchestrator
+    restart: unless-stopped
+    environment:
+      - AGENT_CONFIG=/app/agents/agent_config.docker.yaml
+      - WEIGHTS_PATH=/app/logs/agent_weights.json
+      - QUERY_LOG_PATH=/app/logs/query_metrics.jsonl
+    volumes:
+      - ./logs:/app/logs
+      - ./results:/app/results
+      - ./agents:/app/agents
+    ports:
+      - "8000:8000"
+    depends_on:
+      - agent_llama3
+      - agent_mistral
+      - agent_phi3
+      - agent_gemma
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  agent_llama3:
+    image: ollama/ollama:latest
+    container_name: agent_llama3
+    restart: unless-stopped
+    command: ["serve"]
+    ports:
+      - "11435:11434"
+    volumes:
+      - ollama_llama3:/root/.ollama
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ollama list >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  agent_mistral:
+    image: ollama/ollama:latest
+    container_name: agent_mistral
+    restart: unless-stopped
+    command: ["serve"]
+    ports:
+      - "11436:11434"
+    volumes:
+      - ollama_mistral:/root/.ollama
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ollama list >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  agent_phi3:
+    image: ollama/ollama:latest
+    container_name: agent_phi3
+    restart: unless-stopped
+    command: ["serve"]
+    ports:
+      - "11437:11434"
+    volumes:
+      - ollama_phi3:/root/.ollama
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ollama list >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  agent_gemma:
+    image: ollama/ollama:latest
+    container_name: agent_gemma
+    restart: unless-stopped
+    command: ["serve"]
+    ports:
+      - "11438:11434"
+    volumes:
+      - ollama_gemma:/root/.ollama
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ollama list >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  ollama_llama3:
+  ollama_mistral:
+  ollama_phi3:
+  ollama_gemma:

@@ -1,0 +1,54 @@
+project:
+  local_path: /root/distributed_ai
+  remote_path: /opt/distributed_ai
+
+orchestrator:
+  host: 172.16.185.10
+  user: ubuntu
+  port: 22
+
+agents:
+  - id: agent_llama3
+    host: 172.16.185.21
+    user: ubuntu
+    port: 22
+    model: auto
+    preferred_model: llama3:8b
+    enabled: true
+    topic_tags: [general, reasoning, factual]
+
+  - id: agent_mistral
+    host: 172.16.185.22
+    user: ubuntu
+    port: 22
+    model: auto
+    preferred_model: mistral:7b
+    enabled: true
+    topic_tags: [general, science, reasoning]
+
+  - id: agent_phi3
+    host: 172.16.185.23
+    user: ubuntu
+    port: 22
+    model: auto
+    preferred_model: phi3:mini
+    enabled: true
+    topic_tags: [general, coding, math]
+
+  - id: agent_gemma
+    host: 172.16.185.24
+    user: ubuntu
+    port: 22
+    model: auto
+    preferred_model: gemma:9b
+    enabled: true
+    topic_tags: [general, factual, science]
+
+benchmarks:
+  run_after_deploy: true
+  repetitions: 5
+  samples_per_benchmark: 20
+  strategies: [majority, weighted, isp, topic, debate]
+  suites: [mmlu, gsm8k, truthfulqa]
+  deterministic: true
+  seed: 42
