@@ -336,6 +336,34 @@ python run_experiments.py \
 
 ---
 
+## Live Validation Passed (February 27, 2026)
+
+Validated from the public GitHub Pages portal and public orchestrator endpoint.
+
+- Public site: `https://anis151993.github.io/Distributed-AI/`
+- Public orchestrator endpoint: `https://ai.marcbd.site`
+- CORS status: verified for `https://anis151993.github.io`
+- Agent health: 4/4 healthy
+- Playground `majority` query: passed
+- Returned answer: `4`
+- Query timestamp (UTC): `2026-02-27T06:47:49.561498+00:00`
+
+Evidence snapshot (from public Playground response):
+
+```json
+{
+  "strategy": "majority",
+  "aggregate": {
+    "answer": "4",
+    "agreement_rate": 1
+  },
+  "agent_count": 4,
+  "total_latency_ms": 33847.143
+}
+```
+
+---
+
 ## Reproducibility Controls
 
 - Fixed random seed support (`--seed`)
