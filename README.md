@@ -84,6 +84,25 @@ Orchestrator (FastAPI)
 Aggregation + Metrics + Statistical Testing + Artifact Export
 ```
 
+### Interactive Architecture (Mermaid)
+
+```mermaid
+flowchart TD
+    U[User Query] --> O[Orchestrator FastAPI]
+    O --> A1[Agent 1 llama3.2:3b]
+    O --> A2[Agent 2 qwen2.5:3b]
+    O --> A3[Agent 3 phi3:mini]
+    O --> A4[Agent 4 gemma2:2b]
+    A1 --> G[Aggregation + Metrics + Statistics]
+    A2 --> G
+    A3 --> G
+    A4 --> G
+    G --> R[Final Response + Artifacts]
+```
+
+Interactive public version:
+- `https://anis151993.github.io/Distributed-AI/#architecture`
+
 ### Orchestrator endpoints
 
 - `GET /health`
@@ -211,11 +230,17 @@ Key files:
 
 Web UI files:
 
-- `docs/index.html` (project research landing page)
+- `docs/index.html` (public research portal)
 - `docs/interactive_dashboard.html` (interactive charts)
 - `docs/styles.css`
 - `docs/script.js`
 - `docs/assets/data/report_data.js` (embedded chart data)
+
+Public portal features:
+- Interactive architecture map (click nodes + flow simulation)
+- Live AI playground (`/query` API caller with strategy controls)
+- Embedded IEEE paper reader
+- Direct links to project repository and GitHub profile
 
 Enable on GitHub:
 
@@ -231,6 +256,9 @@ cd docs
 python3 -m http.server 8080
 # open http://localhost:8080
 ```
+
+Public URL:
+- `https://anis151993.github.io/Distributed-AI/`
 
 ---
 
