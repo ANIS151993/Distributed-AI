@@ -46,6 +46,7 @@ class QueryRequest(BaseModel):
     seed: int = 42
     max_tokens: int = 64
     max_agents: Optional[int] = None
+    agent_ids: List[str] = Field(default_factory=list)
     ground_truth: Optional[str] = None
     metadata: Dict[str, Any] = Field(default_factory=dict)
     mock_mode: bool = False
@@ -246,14 +247,20 @@ class OrchestratorService:
         set_global_seed(req.seed, req.deterministic)
 
         selected_agents = self.enabled_agents
+        requested_agent_ids = [agent_id for agent_id in req.agent_ids if agent_id]
+        if requested_agent_ids:
+            requested_set = set(requested_agent_ids)
+            selected_agents = [agent for agent in self.enabled_agents if agent.id in requested_set]
+
         topic = "general"
         if req.strategy == "topic" and not req.compute_all_direct:
-            topic, selected_agents = self.router.route(req.prompt, self.enabled_agents, req.max_agents)
+            topic, selected_agents = self.router.route(req.prompt, selected_agents, req.max_agents)
         elif req.max_agents:
             selected_agents = selected_agents[: req.max_agents]
 
         if not selected_agents:
-            raise HTTPException(status_code=400, detail="No enabled agents available")
+            detail = "No selected agents are enabled/reachable" if requested_agent_ids else "No enabled agents available"
+            raise HTTPException(status_code=400, detail=detail)
 
         debate_trace = None
         all_aggregates: Optional[Dict[str, Any]] = None
@@ -362,6 +369,8 @@ class OrchestratorService:
             "timestamp": now_utc_iso(),
             "strategy": req.strategy,
             "topic": topic,
+            "requested_agent_ids": requested_agent_ids,
+            "selected_agent_ids": [agent.id for agent in selected_agents],
             "aggregate": aggregate,
             "agent_responses": agent_responses,
             "weights": self.aggregator.weights,
@@ -384,6 +393,7 @@ class OrchestratorService:
                 "deterministic": req.deterministic,
                 "seed": req.seed,
                 "max_agents": req.max_agents,
+                "agent_ids": requested_agent_ids,
                 "mock_mode": req.mock_mode,
             },
             "dependent_variables": {

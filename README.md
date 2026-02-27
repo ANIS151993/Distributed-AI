@@ -249,6 +249,8 @@ Web UI files:
 Public portal features:
 - Interactive architecture map (click nodes + flow simulation)
 - Live AI playground (`/query` API caller with strategy controls)
+- Individual model selection (choose any subset of agents per query)
+- Per-query visual analytics (per-model latency/tokens and answer distribution charts)
 - Embedded IEEE paper reader
 - Direct links to project repository and GitHub profile
 

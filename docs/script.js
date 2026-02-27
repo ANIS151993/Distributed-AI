@@ -125,7 +125,17 @@ function initPlayground() {
   const outputEl = document.getElementById("playgroundOutput");
   const runBtn = document.getElementById("runQueryBtn");
   const checkBtn = document.getElementById("checkEndpointBtn");
+  const selectAllBtn = document.getElementById("selectAllAgentsBtn");
+  const clearAgentsBtn = document.getElementById("clearAgentsBtn");
+  const agentSelector = document.getElementById("agentSelector");
+  const tableBody = document.getElementById("queryAgentTableBody");
+  const latencyCanvas = document.getElementById("queryLatencyChart");
+  const tokenCanvas = document.getElementById("queryTokenChart");
+  const answerCanvas = document.getElementById("queryAnswerChart");
   if (!form || !statusEl || !outputEl || !runBtn) return;
+
+  const queryCharts = { latency: null, tokens: null, answers: null };
+  const state = { agents: [] };
 
   const params = new URLSearchParams(window.location.search);
   const qsEndpoint = params.get("endpoint");
@@ -143,6 +153,182 @@ function initPlayground() {
 
   function resolveEndpoint() {
     return form.apiEndpoint.value.trim().replace(/\/+$/, "");
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function getSelectedAgentIds() {
+    return Array.from(document.querySelectorAll('input[name="agentSelect"]:checked')).map((el) => el.value);
+  }
+
+  function setAllAgentSelection(checked) {
+    Array.from(document.querySelectorAll('input[name="agentSelect"]')).forEach((el) => {
+      el.checked = checked;
+    });
+  }
+
+  function renderAgentSelector(agents) {
+    if (!agentSelector) return;
+    if (!Array.isArray(agents) || agents.length === 0) {
+      agentSelector.innerHTML = '<p class="muted">No enabled agents found from /agents.</p>';
+      return;
+    }
+
+    const existingSelection = new Set(getSelectedAgentIds());
+    const useExisting = existingSelection.size > 0;
+    agentSelector.innerHTML = agents
+      .map((agent) => {
+        const checked = useExisting ? existingSelection.has(agent.id) : true;
+        return `
+          <div class="agent-option">
+            <label>
+              <input type="checkbox" name="agentSelect" value="${escapeHtml(agent.id)}" ${checked ? "checked" : ""} />
+              ${escapeHtml(agent.id)}
+            </label>
+            <div class="agent-meta">${escapeHtml(agent.model)} @ ${escapeHtml(agent.host)}:${escapeHtml(agent.port)}</div>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  function destroyQueryCharts() {
+    if (queryCharts.latency) queryCharts.latency.destroy();
+    if (queryCharts.tokens) queryCharts.tokens.destroy();
+    if (queryCharts.answers) queryCharts.answers.destroy();
+    queryCharts.latency = null;
+    queryCharts.tokens = null;
+    queryCharts.answers = null;
+  }
+
+  function renderResultTable(responses) {
+    if (!tableBody) return;
+    if (!Array.isArray(responses) || responses.length === 0) {
+      tableBody.innerHTML = '<tr><td colspan="6">No per-model responses available.</td></tr>';
+      return;
+    }
+
+    tableBody.innerHTML = responses
+      .map((row) => {
+        const answer = row.normalized_answer || row.answer || "(empty)";
+        const status = row.error ? `error: ${row.error}` : "ok";
+        return `
+          <tr>
+            <td>${escapeHtml(row.agent_id || "")}</td>
+            <td>${escapeHtml(row.model_id || "")}</td>
+            <td>${escapeHtml(answer)}</td>
+            <td>${Number(row.latency_ms || 0).toFixed(1)}</td>
+            <td>${Number(row.token_count || 0)}</td>
+            <td>${escapeHtml(status)}</td>
+          </tr>
+        `;
+      })
+      .join("");
+  }
+
+  function renderQueryCharts(responses) {
+    destroyQueryCharts();
+    if (!Array.isArray(responses) || responses.length === 0 || typeof Chart === "undefined") return;
+
+    const labels = responses.map((row) => `${row.agent_id}`);
+    const latency = responses.map((row) => Number(row.latency_ms || 0));
+    const tokens = responses.map((row) => Number(row.token_count || 0));
+    const palette = ["#0f766e", "#2563eb", "#d97706", "#dc2626", "#0ea5e9", "#6d28d9"];
+
+    if (latencyCanvas) {
+      queryCharts.latency = new Chart(latencyCanvas, {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Latency (ms)",
+              data: latency,
+              backgroundColor: labels.map((_, idx) => palette[idx % palette.length]),
+              borderRadius: 8,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { y: { title: { display: true, text: "ms" } } },
+        },
+      });
+    }
+
+    if (tokenCanvas) {
+      queryCharts.tokens = new Chart(tokenCanvas, {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Token Count",
+              data: tokens,
+              backgroundColor: labels.map((_, idx) => palette[(idx + 2) % palette.length]),
+              borderRadius: 8,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { y: { title: { display: true, text: "tokens" } } },
+        },
+      });
+    }
+
+    const answerCounts = {};
+    responses.forEach((row) => {
+      const key = (row.normalized_answer || row.answer || "(empty)").toString().trim() || "(empty)";
+      answerCounts[key] = (answerCounts[key] || 0) + 1;
+    });
+
+    if (answerCanvas) {
+      const answerLabels = Object.keys(answerCounts);
+      queryCharts.answers = new Chart(answerCanvas, {
+        type: "pie",
+        data: {
+          labels: answerLabels,
+          datasets: [
+            {
+              data: answerLabels.map((key) => answerCounts[key]),
+              backgroundColor: answerLabels.map((_, idx) => palette[idx % palette.length]),
+            },
+          ],
+        },
+        options: { responsive: true, plugins: { legend: { position: "bottom" } } },
+      });
+    }
+  }
+
+  async function loadAgents(endpoint) {
+    if (!endpoint) return [];
+    try {
+      const response = await fetch(`${endpoint}/agents`, { method: "GET" });
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(`Failed to load agents: HTTP ${response.status}`);
+      }
+      const agents = Array.isArray(body.agents) ? body.agents.filter((agent) => agent.enabled !== false) : [];
+      state.agents = agents;
+      renderAgentSelector(agents);
+      return agents;
+    } catch (error) {
+      state.agents = [];
+      renderAgentSelector([]);
+      statusEl.textContent = "Connected, but failed to load /agents.";
+      outputEl.textContent = String(error);
+      return [];
+    }
   }
 
   if (checkBtn) {
@@ -166,7 +352,8 @@ function initPlayground() {
           outputEl.textContent = JSON.stringify(body, null, 2);
           return;
         }
-        statusEl.textContent = "Connection OK. You can run queries now.";
+        const agents = await loadAgents(endpoint);
+        statusEl.textContent = `Connection OK. Loaded ${agents.length} model(s). You can run queries now.`;
         outputEl.textContent = JSON.stringify(body, null, 2);
       } catch (error) {
         statusEl.textContent = "Health check error. Verify endpoint and CORS.";
@@ -175,6 +362,14 @@ function initPlayground() {
         checkBtn.disabled = false;
       }
     });
+  }
+
+  if (selectAllBtn) {
+    selectAllBtn.addEventListener("click", () => setAllAgentSelection(true));
+  }
+
+  if (clearAgentsBtn) {
+    clearAgentsBtn.addEventListener("click", () => setAllAgentSelection(false));
   }
 
   form.addEventListener("submit", async (event) => {
@@ -189,6 +384,16 @@ function initPlayground() {
 
     localStorage.setItem("distributed_ai_endpoint", endpoint);
     localStorage.setItem("distributed_ai_prompt", form.prompt.value);
+    if (!state.agents.length) {
+      await loadAgents(endpoint);
+    }
+
+    const selectedAgentIds = getSelectedAgentIds();
+    if (selectedAgentIds.length === 0) {
+      statusEl.textContent = "Select at least one model before running query.";
+      outputEl.textContent = "Use Select All or check individual models in the model selector.";
+      return;
+    }
 
     const payload = {
       prompt: form.prompt.value,
@@ -197,6 +402,7 @@ function initPlayground() {
       temperature: Number(form.temperature.value || 0),
       deterministic: Boolean(form.deterministic.checked),
       max_tokens: Number(form.maxTokens.value || 64),
+      agent_ids: selectedAgentIds,
     };
 
     runBtn.disabled = true;
@@ -226,8 +432,10 @@ function initPlayground() {
         body.aggregate_answer ||
         body.response ||
         "No answer field in response.";
-      statusEl.textContent = `Success in ${elapsed} ms | Strategy: ${payload.strategy} | Answer: ${String(answer).slice(0, 120)}`;
+      statusEl.textContent = `Success in ${elapsed} ms | Strategy: ${payload.strategy} | Models: ${selectedAgentIds.length} | Answer: ${String(answer).slice(0, 120)}`;
       outputEl.textContent = JSON.stringify(body, null, 2);
+      renderQueryCharts(body.agent_responses || []);
+      renderResultTable(body.agent_responses || []);
     } catch (error) {
       statusEl.textContent = "Network/CORS error. Ensure endpoint is reachable and CORS allows this origin.";
       outputEl.textContent = String(error);
