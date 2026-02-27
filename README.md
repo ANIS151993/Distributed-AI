@@ -30,6 +30,21 @@ This project is designed for reproducibility and IEEE-style reporting.
 
 ---
 
+## Research Video (Graphical Walkthrough)
+
+For a visual explanation of the full research pipeline, watch:
+
+- `https://youtu.be/Zybs0Omg600`
+
+<div align="center">
+  <a href="https://youtu.be/Zybs0Omg600" target="_blank">
+    <img src="https://img.youtube.com/vi/Zybs0Omg600/maxresdefault.jpg" alt="Distributed AI Ensemble Research Video" width="85%" />
+  </a>
+  <p><strong>Click the image to open the full video on YouTube.</strong></p>
+</div>
+
+---
+
 ## Authors
 
 - **Md Anisur Rahman Chowdhury<sup>1*</sup>**, **Kefei Wang<sup>1</sup>**
@@ -248,6 +263,7 @@ Web UI files:
 
 Public portal features:
 - Interactive architecture map (click nodes + flow simulation)
+- Research video section with embedded YouTube walkthrough
 - Live AI playground (`/query` API caller with strategy controls)
 - Individual model selection (choose any subset of agents per query)
 - Per-query visual analytics (per-model latency/tokens and answer distribution charts)
