@@ -220,7 +220,12 @@ function initPlayground() {
         return;
       }
 
-      const answer = body.answer || body.response || "No answer field in response.";
+      const answer =
+        body.answer ||
+        body.aggregate?.answer ||
+        body.aggregate_answer ||
+        body.response ||
+        "No answer field in response.";
       statusEl.textContent = `Success in ${elapsed} ms | Strategy: ${payload.strategy} | Answer: ${String(answer).slice(0, 120)}`;
       outputEl.textContent = JSON.stringify(body, null, 2);
     } catch (error) {
