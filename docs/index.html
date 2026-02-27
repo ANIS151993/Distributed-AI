@@ -198,12 +198,23 @@
         <div class="quick-guide">
           <h3>Easy Steps</h3>
           <ol>
-            <li>Paste your public orchestrator base URL (example: <code>https://your-domain.com</code>).</li>
+            <li>For this deployment, use <code>https://ai.marcbd.site</code> as the Orchestrator API URL.</li>
             <li>Click <strong>Check Connection</strong> to test <code>/health</code>.</li>
-            <li>Select any combination of AI models and choose strategy.</li>
-            <li>Keep seed <code>42</code>, then click <strong>Run Query</strong>.</li>
-            <li>Read the short answer and full JSON output on the right panel.</li>
+            <li>Select one or more models in <strong>Select Models</strong> (you can compare models individually).</li>
+            <li>Recommended stable test settings: Strategy <code>majority</code>, Seed <code>42</code>, Temperature <code>0.0</code>, Deterministic <code>ON</code>, Max tokens <code>24-64</code>.</li>
+            <li>Click <strong>Run Query</strong> and review the final answer, JSON output, and model charts below.</li>
           </ol>
+        </div>
+        <div class="support-endpoint">
+          <div>
+            <p><strong>Support Endpoint</strong></p>
+            <p class="muted">Recommended public endpoint for this project:</p>
+            <p><code id="recommendedEndpoint">https://ai.marcbd.site</code></p>
+          </div>
+          <div class="support-actions">
+            <button class="btn btn-primary" type="button" id="useRecommendedEndpointBtn">Use ai.marcbd.site</button>
+            <a class="btn" href="https://ai.marcbd.site/health" target="_blank" rel="noreferrer">Open /health</a>
+          </div>
         </div>
         <div class="playground-grid">
           <form id="playgroundForm" class="playground-card">
@@ -256,6 +267,31 @@
             <h3>Response</h3>
             <p id="playgroundStatus" class="muted">Waiting for query...</p>
             <pre id="playgroundOutput">No response yet.</pre>
+            <div class="query-insights" id="queryInsights">
+              <h3>Live Query Insights</h3>
+              <div class="insight-grid">
+                <div class="insight-card">
+                  <span>Final Answer</span>
+                  <strong id="insightAnswer">-</strong>
+                </div>
+                <div class="insight-card">
+                  <span>Agreement</span>
+                  <strong id="insightAgreement">-</strong>
+                </div>
+                <div class="insight-card">
+                  <span>Total Latency</span>
+                  <strong id="insightLatency">-</strong>
+                </div>
+                <div class="insight-card">
+                  <span>Active Models</span>
+                  <strong id="insightModels">-</strong>
+                </div>
+              </div>
+              <div class="agreement-track">
+                <div class="agreement-fill" id="agreementMeterFill"></div>
+              </div>
+              <p class="muted" id="agreementLabel">Agreement distribution will appear after query.</p>
+            </div>
           </div>
         </div>
 
@@ -377,6 +413,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260227-02"></script>
+  <script src="script.js?v=20260227-03"></script>
 </body>
 </html>

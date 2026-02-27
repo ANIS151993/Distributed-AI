@@ -125,6 +125,8 @@ function initPlayground() {
   const outputEl = document.getElementById("playgroundOutput");
   const runBtn = document.getElementById("runQueryBtn");
   const checkBtn = document.getElementById("checkEndpointBtn");
+  const useRecommendedEndpointBtn = document.getElementById("useRecommendedEndpointBtn");
+  const recommendedEndpointEl = document.getElementById("recommendedEndpoint");
   const selectAllBtn = document.getElementById("selectAllAgentsBtn");
   const clearAgentsBtn = document.getElementById("clearAgentsBtn");
   const agentSelector = document.getElementById("agentSelector");
@@ -132,6 +134,12 @@ function initPlayground() {
   const latencyCanvas = document.getElementById("queryLatencyChart");
   const tokenCanvas = document.getElementById("queryTokenChart");
   const answerCanvas = document.getElementById("queryAnswerChart");
+  const insightAnswer = document.getElementById("insightAnswer");
+  const insightAgreement = document.getElementById("insightAgreement");
+  const insightLatency = document.getElementById("insightLatency");
+  const insightModels = document.getElementById("insightModels");
+  const agreementMeterFill = document.getElementById("agreementMeterFill");
+  const agreementLabel = document.getElementById("agreementLabel");
   if (!form || !statusEl || !outputEl || !runBtn) return;
 
   const queryCharts = { latency: null, tokens: null, answers: null };
@@ -233,6 +241,33 @@ function initPlayground() {
       .join("");
   }
 
+  function resetQueryInsights() {
+    if (insightAnswer) insightAnswer.textContent = "-";
+    if (insightAgreement) insightAgreement.textContent = "-";
+    if (insightLatency) insightLatency.textContent = "-";
+    if (insightModels) insightModels.textContent = "-";
+    if (agreementMeterFill) agreementMeterFill.style.width = "0%";
+    if (agreementLabel) agreementLabel.textContent = "Agreement distribution will appear after query.";
+  }
+
+  function updateQueryInsights(body, selectedModelCount, answerText, elapsedMs) {
+    const agreement = Number(body?.aggregate?.agreement_rate ?? 0);
+    const totalLatency = Number(body?.total_latency_ms ?? elapsedMs ?? 0);
+    const modelCount = Array.isArray(body?.selected_agent_ids)
+      ? body.selected_agent_ids.length
+      : selectedModelCount;
+    const agreementPct = Number.isFinite(agreement) ? Math.max(0, Math.min(100, agreement * 100)) : 0;
+
+    if (insightAnswer) insightAnswer.textContent = String(answerText || "-").slice(0, 28);
+    if (insightAgreement) insightAgreement.textContent = `${agreementPct.toFixed(0)}%`;
+    if (insightLatency) insightLatency.textContent = `${totalLatency.toFixed(1)} ms`;
+    if (insightModels) insightModels.textContent = String(modelCount || 0);
+    if (agreementMeterFill) agreementMeterFill.style.width = `${agreementPct.toFixed(1)}%`;
+    if (agreementLabel) {
+      agreementLabel.textContent = `Agreement rate is ${agreementPct.toFixed(1)}% across selected models.`;
+    }
+  }
+
   function renderQueryCharts(responses) {
     destroyQueryCharts();
     if (!Array.isArray(responses) || responses.length === 0 || typeof Chart === "undefined") return;
@@ -331,6 +366,16 @@ function initPlayground() {
     }
   }
 
+  if (useRecommendedEndpointBtn && recommendedEndpointEl) {
+    useRecommendedEndpointBtn.addEventListener("click", () => {
+      const value = recommendedEndpointEl.textContent.trim();
+      if (!value) return;
+      form.apiEndpoint.value = value;
+      localStorage.setItem("distributed_ai_endpoint", value);
+      statusEl.textContent = "Recommended endpoint applied. Click Check Connection.";
+    });
+  }
+
   if (checkBtn) {
     checkBtn.addEventListener("click", async () => {
       const endpoint = resolveEndpoint();
@@ -408,6 +453,7 @@ function initPlayground() {
     runBtn.disabled = true;
     statusEl.textContent = "Running query...";
     outputEl.textContent = "Waiting for response...";
+    resetQueryInsights();
     const started = performance.now();
 
     try {
@@ -436,9 +482,11 @@ function initPlayground() {
       outputEl.textContent = JSON.stringify(body, null, 2);
       renderQueryCharts(body.agent_responses || []);
       renderResultTable(body.agent_responses || []);
+      updateQueryInsights(body, selectedAgentIds.length, answer, elapsed);
     } catch (error) {
       statusEl.textContent = "Network/CORS error. Ensure endpoint is reachable and CORS allows this origin.";
       outputEl.textContent = String(error);
+      resetQueryInsights();
     } finally {
       runBtn.disabled = false;
     }
