@@ -11,6 +11,7 @@ from typing import Any, Dict, List, Literal, Optional
 
 import httpx
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from .aggregator import AggregationManager
@@ -445,6 +446,29 @@ class OrchestratorService:
 
 service = OrchestratorService(AGENT_CONFIG_PATH)
 app = FastAPI(title="Distributed AI Orchestrator", version="1.0.0")
+
+
+def _cors_origins() -> List[str]:
+    default_origins = ",".join(
+        [
+            "https://anis151993.github.io",
+            "http://localhost:8080",
+            "http://127.0.0.1:8080",
+        ]
+    )
+    raw = os.getenv("CORS_ALLOW_ORIGINS", default_origins)
+    origins = [item.strip() for item in raw.split(",") if item.strip()]
+    return origins or ["*"]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_cors_origins(),
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
+    max_age=600,
+)
 
 
 @app.get("/")

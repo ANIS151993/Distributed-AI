@@ -260,6 +260,17 @@ python3 -m http.server 8080
 Public URL:
 - `https://anis151993.github.io/Distributed-AI/`
 
+### Public playground connection (required once)
+
+If you want browser visitors to run live queries from GitHub Pages, set CORS on the orchestrator:
+
+```bash
+export CORS_ALLOW_ORIGINS="https://anis151993.github.io,http://localhost:8080,http://127.0.0.1:8080"
+uvicorn orchestrator.main:app --host 0.0.0.0 --port 8000
+```
+
+Then, in the website playground, set your public orchestrator endpoint (for example, your tunnel URL) and run a query.
+
 ---
 
 ## Quick Start
