@@ -30,6 +30,14 @@ This project is designed for reproducibility and IEEE-style reporting.
 
 ---
 
+## Authors
+
+- **Md Anisur Rahman Chowdhury<sup>1*</sup>**, **Kefei Wang<sup>1</sup>**
+- **<sup>1</sup>** Dept. of Computer and Information Science, Gannon University, USA
+- Emails: `engr.aanis@gmail.com`, `wang039@gannon.edu`
+
+---
+
 ## What We Built and Why
 
 ### 1) Distributed inference cluster
@@ -391,7 +399,7 @@ Distributed-AI/
 ```bibtex
 @article{chowdhury2026distributedai,
   title={A Local Distributed Multi-Agent LLM Ensemble: Architecture, Optimization, and Reproducible Evaluation},
-  author={Chowdhury, Md Anisur Rahman},
+  author={Chowdhury, Md Anisur Rahman and Wang, Kefei},
   year={2026},
   institution={Gannon University}
 }
@@ -399,16 +407,17 @@ Distributed-AI/
 
 ---
 
-## Author
+## Authors
 
-**Md Anisur Rahman Chowdhury** - Gannon University *(Corresponding Author)*  
-Email: [chowdhur014@gannon.edu](mailto:chowdhur014@gannon.edu)
+**Md Anisur Rahman Chowdhury<sup>1*</sup>**, **Kefei Wang<sup>1</sup>**  
+**<sup>1</sup>** Dept. of Computer and Information Science, Gannon University, USA  
+Emails: [engr.aanis@gmail.com](mailto:engr.aanis@gmail.com), [wang039@gannon.edu](mailto:wang039@gannon.edu)
 
 ---
 
 ## Copyright
 
-Copyright (c) 2026 Md Anisur Rahman Chowdhury  
-Email: chowdhur014@gannon.edu  
-Affiliation: Gannon University  
+Copyright (c) 2026 Md Anisur Rahman Chowdhury and Kefei Wang  
+Emails: engr.aanis@gmail.com, wang039@gannon.edu  
+Affiliation: Dept. of Computer and Information Science, Gannon University, USA  
 All rights reserved.

@@ -44,9 +44,12 @@
       </p>
 
       <div class="author-block">
-        <p><strong>Md Anisur Rahman Chowdhury</strong></p>
-        <p>Gannon University</p>
-        <p><a href="mailto:chowdhur014@gannon.edu">chowdhur014@gannon.edu</a></p>
+        <p><strong>Md Anisur Rahman Chowdhury<sup>1*</sup>, Kefei Wang<sup>1</sup></strong></p>
+        <p><sup>1</sup>Dept. of Computer and Information Science, Gannon University, USA</p>
+        <p>
+          <a href="mailto:engr.aanis@gmail.com">engr.aanis@gmail.com</a> |
+          <a href="mailto:wang039@gannon.edu">wang039@gannon.edu</a>
+        </p>
       </div>
 
       <div class="hero-actions">
@@ -192,6 +195,15 @@
           This playground calls your orchestrator <code>/query</code> API directly.
           For public use, set a public HTTPS endpoint (for example, your tunnel URL) with CORS enabled on the orchestrator.
         </p>
+        <div class="quick-guide">
+          <h3>Easy Steps</h3>
+          <ol>
+            <li>Paste your public orchestrator base URL (example: <code>https://your-domain.com</code>).</li>
+            <li>Click <strong>Check Connection</strong> to test <code>/health</code>.</li>
+            <li>Choose strategy, keep seed <code>42</code>, and click <strong>Run Query</strong>.</li>
+            <li>Read the short answer and full JSON output on the right panel.</li>
+          </ol>
+        </div>
         <div class="playground-grid">
           <form id="playgroundForm" class="playground-card">
             <label for="apiEndpoint">Orchestrator API URL</label>
@@ -199,6 +211,7 @@
             <p class="input-help">
               Example endpoint: <code>https://your-subdomain.example.com</code> (without trailing <code>/query</code>).
             </p>
+            <button class="btn" type="button" id="checkEndpointBtn">Check Connection</button>
 
             <label for="strategy">Strategy</label>
             <select id="strategy" name="strategy">
@@ -312,7 +325,9 @@
 
   <footer>
     <div class="container">
-      <p>Copyright (c) 2026 Md Anisur Rahman Chowdhury | chowdhur014@gannon.edu | Gannon University</p>
+      <p>Authors: Md Anisur Rahman Chowdhury<sup>1*</sup>, Kefei Wang<sup>1</sup></p>
+      <p><sup>1</sup>Dept. of Computer and Information Science, Gannon University, USA</p>
+      <p>Emails: engr.aanis@gmail.com, wang039@gannon.edu</p>
       <p><a href="#top">Back to top</a></p>
     </div>
   </footer>

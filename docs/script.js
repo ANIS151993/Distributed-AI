@@ -124,6 +124,7 @@ function initPlayground() {
   const statusEl = document.getElementById("playgroundStatus");
   const outputEl = document.getElementById("playgroundOutput");
   const runBtn = document.getElementById("runQueryBtn");
+  const checkBtn = document.getElementById("checkEndpointBtn");
   if (!form || !statusEl || !outputEl || !runBtn) return;
 
   const params = new URLSearchParams(window.location.search);
@@ -140,10 +141,46 @@ function initPlayground() {
     form.prompt.value = savedPrompt;
   }
 
+  function resolveEndpoint() {
+    return form.apiEndpoint.value.trim().replace(/\/+$/, "");
+  }
+
+  if (checkBtn) {
+    checkBtn.addEventListener("click", async () => {
+      const endpoint = resolveEndpoint();
+      if (!endpoint) {
+        statusEl.textContent = "Add your base URL first, then click Check Connection.";
+        outputEl.textContent = "Example: https://your-public-endpoint.example.com";
+        return;
+      }
+
+      checkBtn.disabled = true;
+      statusEl.textContent = "Checking /health...";
+      outputEl.textContent = "Waiting for health response...";
+
+      try {
+        const response = await fetch(`${endpoint}/health`, { method: "GET" });
+        const body = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          statusEl.textContent = `Health check failed (${response.status}).`;
+          outputEl.textContent = JSON.stringify(body, null, 2);
+          return;
+        }
+        statusEl.textContent = "Connection OK. You can run queries now.";
+        outputEl.textContent = JSON.stringify(body, null, 2);
+      } catch (error) {
+        statusEl.textContent = "Health check error. Verify endpoint and CORS.";
+        outputEl.textContent = String(error);
+      } finally {
+        checkBtn.disabled = false;
+      }
+    });
+  }
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const endpoint = form.apiEndpoint.value.trim().replace(/\/+$/, "");
+    const endpoint = resolveEndpoint();
     if (!endpoint) {
       statusEl.textContent = "Set your public orchestrator endpoint first.";
       outputEl.textContent = "Example: https://your-public-endpoint.example.com";

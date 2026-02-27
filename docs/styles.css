@@ -205,6 +205,28 @@ p {
   color: var(--muted);
 }
 
+.quick-guide {
+  margin: 10px 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fffefb;
+  box-shadow: var(--shadow);
+  padding: 12px 14px;
+}
+
+.quick-guide h3 {
+  margin: 0 0 8px;
+}
+
+.quick-guide ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.quick-guide li {
+  margin: 4px 0;
+}
+
 .step-card {
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -360,6 +382,10 @@ p {
   margin: 6px 0 2px;
   color: #475569;
   font-size: 0.9rem;
+}
+
+#checkEndpointBtn {
+  margin: 6px 0 10px;
 }
 
 .checkbox-row {
