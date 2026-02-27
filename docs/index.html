@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Distributed AI Ensemble Research Portal</title>
+  <meta
+    name="description"
+    content="Local distributed AI ensemble system with reproducible benchmarking, interactive analytics, and IEEE-ready publication assets."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="assets/data/report_data.js"></script>
+</head>
+<body>
+  <nav class="site-nav" id="top">
+    <div class="nav-inner">
+      <div class="brand">Distributed AI Ensemble</div>
+      <div class="nav-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#results">Results</a>
+        <a href="#resources">Resources</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <p class="kicker">IEEE-Style Research Project</p>
+      <h1>A Local Distributed Multi-Agent LLM Ensemble System</h1>
+      <p class="subtitle">
+        Orchestrated local inference across multiple agent models with modular aggregation,
+        reproducible benchmarks, statistical significance testing, and publication-ready outputs.
+      </p>
+
+      <div class="author-block">
+        <p><strong>Md Anisur Rahman Chowdhury</strong></p>
+        <p>Gannon University</p>
+        <p><a href="mailto:chowdhur014@gannon.edu">chowdhur014@gannon.edu</a></p>
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="interactive_dashboard.html">Open Interactive Dashboard</a>
+        <a class="btn" href="../paper/IEEE_Distributed_AI_Ensemble.pdf">Read PDF</a>
+        <a class="btn" href="../README.md">Project README</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="abstract">
+      <div class="container narrow">
+        <h2>Abstract</h2>
+        <p>
+          This project presents a complete local distributed AI network in which one FastAPI orchestrator
+          routes prompts to four local Ollama-based LLM agents, aggregates answers with multiple ensemble
+          strategies, and logs benchmark-ready metrics. The system implements majority voting, dynamic weighted
+          voting, inverse surprising popularity (ISP), topic-based routing, and two-round debate. Evaluation is
+          automated over MMLU, GSM8K, and TruthfulQA with deterministic controls, repeated trials, confidence
+          intervals, paired t-tests, and Wilcoxon signed-rank tests. All outputs are exported as CSV, JSON,
+          PNG figures, and IEEE LaTeX tables, with an accompanying manuscript package for conference submission.
+        </p>
+      </div>
+    </section>
+
+    <section class="section alt" id="architecture">
+      <div class="container">
+        <h2>System Architecture</h2>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>Node Layout</h3>
+            <ul>
+              <li>Orchestrator: 172.16.185.223</li>
+              <li>Agent 1: 172.16.185.209 (llama3.2:3b)</li>
+              <li>Agent 2: 172.16.185.218 (qwen2.5:3b)</li>
+              <li>Agent 3: 172.16.185.220 (phi3:mini)</li>
+              <li>Agent 4: 172.16.185.222 (gemma2:2b)</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Aggregation Methods</h3>
+            <ul>
+              <li>Majority Voting</li>
+              <li>Dynamic Weighted Voting</li>
+              <li>Inverse Surprising Popularity (ISP)</li>
+              <li>Topic-Based Routing</li>
+              <li>Two-Round Debate</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="architecture">
+<pre>User Query
+   |
+   v
+Orchestrator (FastAPI)
+   |---> Agent-1 (Ollama)
+   |---> Agent-2 (Ollama)
+   |---> Agent-3 (Ollama)
+   |---> Agent-4 (Ollama)
+   v
+Aggregation + Metrics + Statistical Analysis + Artifacts</pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="container">
+        <h2>Result Highlights</h2>
+
+        <div class="kpi-grid" id="kpiGrid"></div>
+
+        <div class="chart-panel">
+          <h3>Average Accuracy by Strategy</h3>
+          <canvas id="avgAccChart"></canvas>
+        </div>
+
+        <div class="img-grid">
+          <figure>
+            <img src="assets/figures/accuracy_bar_chart.png" alt="Accuracy by strategy and benchmark" />
+            <figcaption>Accuracy by strategy and benchmark.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figures/latency_line_chart.png" alt="Latency trend across strategies" />
+            <figcaption>Latency profile across strategies.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figures/accuracy_share_pie_chart.png" alt="Average accuracy share" />
+            <figcaption>Average accuracy share (pie chart).</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figures/progress_cumulative_accuracy_line.png" alt="Cumulative progress" />
+            <figcaption>Cumulative GSM8K progress curve.</figcaption>
+          </figure>
+          <figure class="wide">
+            <img src="assets/figures/optimization_progress_bar_chart.png" alt="Optimization comparison" />
+            <figcaption>Runtime optimization comparison.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="resources">
+      <div class="container">
+        <h2>Resources</h2>
+        <div class="resource-grid">
+          <a href="interactive_dashboard.html">Interactive Dashboard</a>
+          <a href="../paper/IEEE_Distributed_AI_Ensemble.tex">IEEE Manuscript (LaTeX)</a>
+          <a href="../paper/IEEE_Distributed_AI_Ensemble.pdf">IEEE Manuscript (PDF)</a>
+          <a href="../paper/README.md">Paper Build Guide</a>
+          <a href="../artifacts/benchmark_runs/run_20260226_193331/overall_summary.csv">Overall Summary (CSV)</a>
+          <a href="../artifacts/benchmark_runs/run_20260226_193331/overall_summary.json">Overall Summary (JSON)</a>
+          <a href="../artifacts/benchmark_runs/run_20260226_193331/overall_significance.csv">Significance Table (CSV)</a>
+          <a href="../README.md">Repository README</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Copyright (c) 2026 Md Anisur Rahman Chowdhury | chowdhur014@gannon.edu | Gannon University</p>
+      <p><a href="#top">Back to top</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

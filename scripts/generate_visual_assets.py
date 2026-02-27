@@ -42,6 +42,13 @@ def as_float(value: Any, default: float = 0.0) -> float:
         return default
 
 
+def as_pvalue(value: Any) -> float:
+    v = as_float(value, 1.0)
+    if math.isnan(v) or math.isinf(v):
+        return 1.0
+    return v
+
+
 def prepare_dirs() -> None:
     for path in [DOC_FIG_DIR, DOC_DATA_DIR, PAPER_FIG_DIR, PAPER_TABLE_DIR]:
         path.mkdir(parents=True, exist_ok=True)
@@ -295,11 +302,18 @@ def write_paper_tables(metrics: Dict[str, Dict[str, Dict[str, float]]], signific
     table_lines.extend(["\\hline", "\\end{tabular}"])
     (PAPER_TABLE_DIR / "aggregate_strategy_results.tex").write_text("\n".join(table_lines) + "\n", encoding="utf-8")
 
-    sig = [
-        row
-        for row in significance_rows
-        if (as_float(row.get("paired_t_p"), 1.0) < 0.05) or (as_float(row.get("wilcoxon_p"), 1.0) < 0.05)
-    ]
+    sig = []
+    seen = set()
+    for row in significance_rows:
+        t_p = as_pvalue(row.get("paired_t_p"))
+        w_p = as_pvalue(row.get("wilcoxon_p"))
+        if t_p >= 0.05 and w_p >= 0.05:
+            continue
+        key = (row.get("benchmark", ""), row.get("comparison", ""))
+        if key in seen:
+            continue
+        seen.add(key)
+        sig.append(row)
     sig_lines = [
         "\\begin{tabular}{lccccc}",
         "\\hline",
@@ -307,10 +321,13 @@ def write_paper_tables(metrics: Dict[str, Dict[str, Dict[str, float]]], signific
         "\\hline",
     ]
     for row in sig:
+        benchmark = row.get("benchmark", "")
         comp = row.get("comparison", "")
+        if benchmark:
+            comp = f"{benchmark}: {comp}"
         mean_delta = as_float(row.get("mean_delta"), float("nan"))
-        t_p = as_float(row.get("paired_t_p"), float("nan"))
-        w_p = as_float(row.get("wilcoxon_p"), float("nan"))
+        t_p = as_pvalue(row.get("paired_t_p"))
+        w_p = as_pvalue(row.get("wilcoxon_p"))
         t_sig = "Yes" if t_p < 0.05 else "No"
         w_sig = "Yes" if w_p < 0.05 else "No"
         sig_lines.append(f"{comp} & {mean_delta:.3f} & {t_p:.4f} & {w_p:.4f} & {t_sig} & {w_sig} \\\\")
@@ -318,6 +335,33 @@ def write_paper_tables(metrics: Dict[str, Dict[str, Dict[str, float]]], signific
         sig_lines.append("No significant pairs & -- & -- & -- & -- & -- \\\\")
     sig_lines.extend(["\\hline", "\\end{tabular}"])
     (PAPER_TABLE_DIR / "significance_highlights.tex").write_text("\n".join(sig_lines) + "\n", encoding="utf-8")
+
+    per_benchmark = []
+    for benchmark in BENCHMARKS:
+        for strategy in STRATEGIES:
+            per_benchmark.append(
+                (
+                    benchmark,
+                    strategy,
+                    metrics["accuracy"][benchmark][strategy],
+                    metrics["f1"][benchmark][strategy],
+                    metrics["latency"][benchmark][strategy],
+                    metrics["agreement"][benchmark][strategy],
+                )
+            )
+
+    detail_lines = [
+        "\\begin{tabular}{llcccc}",
+        "\\hline",
+        "Benchmark & Strategy & Accuracy & F1 & Latency (ms) & Agreement \\\\",
+        "\\hline",
+    ]
+    for benchmark, strategy, acc, f1, lat, agr in per_benchmark:
+        detail_lines.append(
+            f"{benchmark} & {strategy} & {acc:.3f} & {f1:.3f} & {lat:.1f} & {agr:.3f} \\\\"
+        )
+    detail_lines.extend(["\\hline", "\\end{tabular}"])
+    (PAPER_TABLE_DIR / "per_benchmark_results.tex").write_text("\n".join(detail_lines) + "\n", encoding="utf-8")
 
 
 def copy_figures_to_paper(figures: List[Path]) -> None:
