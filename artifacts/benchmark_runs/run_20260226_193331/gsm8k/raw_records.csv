@@ -1,0 +1,126 @@
+agreement_rate,benchmark,correct,cpu_percent,error,f1,gpu_util_percent,latency_ms,prediction,prompt,repetition,sample_id,strategy,truth
+0.0,gsm8k,0.0,88.4,,0.0,0.0,11718.591,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,0,gsm8k_004,majority,16
+0.0,gsm8k,0.0,92.9,,0.0,0.0,12201.145,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,0,gsm8k_002,majority,150
+1.0,gsm8k,1.0,95.8,,1.0,0.0,9695.472,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,0,gsm8k_003,majority,48
+1.0,gsm8k,1.0,94.8,,1.0,0.0,11364.037,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",0,gsm8k_005,majority,16
+1.0,gsm8k,1.0,93.1,,1.0,0.0,10529.681,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",0,gsm8k_001,majority,7
+0.0,gsm8k,0.0,92.7,,0.0,0.0,11315.587,20,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,0,gsm8k_004,weighted,16
+0.0,gsm8k,1.0,93.1,,1.0,0.0,11916.809,150,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,0,gsm8k_002,weighted,150
+1.0,gsm8k,1.0,96.0,,1.0,0.0,9781.814,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,0,gsm8k_003,weighted,48
+1.0,gsm8k,1.0,94.2,,1.0,0.0,11596.047,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",0,gsm8k_005,weighted,16
+1.0,gsm8k,1.0,92.3,,1.0,0.0,10650.505,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",0,gsm8k_001,weighted,7
+0.0,gsm8k,0.0,92.7,,0.0,0.0,11464.273,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,0,gsm8k_004,isp,16
+0.0,gsm8k,1.0,92.7,,1.0,0.0,11851.216,150,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,0,gsm8k_002,isp,150
+1.0,gsm8k,1.0,96.4,,1.0,0.0,9650.233,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,0,gsm8k_003,isp,48
+1.0,gsm8k,1.0,94.6,,1.0,0.0,11424.096,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",0,gsm8k_005,isp,16
+1.0,gsm8k,1.0,92.4,,1.0,0.0,10487.302,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",0,gsm8k_001,isp,7
+0.0,gsm8k,0.0,71.3,,0.0,0.0,15024.206,18,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,0,gsm8k_004,topic,16
+1.0,gsm8k,0.0,90.2,,0.0,0.0,11885.943,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,0,gsm8k_002,topic,150
+1.0,gsm8k,1.0,90.2,,1.0,0.0,10589.031,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,0,gsm8k_003,topic,48
+1.0,gsm8k,1.0,93.0,,1.0,0.0,11212.344,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",0,gsm8k_005,topic,16
+1.0,gsm8k,1.0,90.8,,1.0,0.0,10607.672,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",0,gsm8k_001,topic,7
+0.0,gsm8k,0.0,92.7,,0.0,0.0,51304.967,14,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,0,gsm8k_004,debate,16
+1.0,gsm8k,0.0,89.7,,0.0,0.0,49966.729,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,0,gsm8k_002,debate,150
+1.0,gsm8k,1.0,87.8,,1.0,0.0,53835.923,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,0,gsm8k_003,debate,48
+0.0,gsm8k,0.0,93.5,,0.0,0.0,50549.077,20,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",0,gsm8k_005,debate,16
+1.0,gsm8k,1.0,92.8,,1.0,0.0,48580.257,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",0,gsm8k_001,debate,7
+0.0,gsm8k,0.0,92.7,,0.0,0.0,11264.432,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,1,gsm8k_004,majority,16
+0.0,gsm8k,0.0,92.9,,0.0,0.0,11820.604,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,1,gsm8k_002,majority,150
+1.0,gsm8k,1.0,96.6,,1.0,0.0,9741.154,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,1,gsm8k_003,majority,48
+1.0,gsm8k,1.0,94.4,,1.0,0.0,11312.933,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",1,gsm8k_005,majority,16
+1.0,gsm8k,1.0,92.7,,1.0,0.0,11038.436,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",1,gsm8k_001,majority,7
+0.0,gsm8k,0.0,92.6,,0.0,0.0,11361.476,20,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,1,gsm8k_004,weighted,16
+0.0,gsm8k,1.0,93.1,,1.0,0.0,11791.465,150,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,1,gsm8k_002,weighted,150
+1.0,gsm8k,1.0,96.1,,1.0,0.0,9698.186,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,1,gsm8k_003,weighted,48
+1.0,gsm8k,1.0,94.3,,1.0,0.0,11360.21,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",1,gsm8k_005,weighted,16
+1.0,gsm8k,1.0,93.2,,1.0,0.0,11043.768,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",1,gsm8k_001,weighted,7
+0.0,gsm8k,0.0,94.7,,0.0,0.0,13736.358,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,1,gsm8k_004,isp,16
+0.0,gsm8k,1.0,94.1,,1.0,0.0,12302.635,150,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,1,gsm8k_002,isp,150
+1.0,gsm8k,1.0,96.1,,1.0,0.0,9942.635,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,1,gsm8k_003,isp,48
+1.0,gsm8k,1.0,94.3,,1.0,0.0,11717.198,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",1,gsm8k_005,isp,16
+1.0,gsm8k,1.0,92.6,,1.0,0.0,10604.075,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",1,gsm8k_001,isp,7
+0.0,gsm8k,0.0,77.1,,0.0,0.0,15361.727,18,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,1,gsm8k_004,topic,16
+1.0,gsm8k,0.0,95.5,,0.0,0.0,15562.876,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,1,gsm8k_002,topic,150
+1.0,gsm8k,1.0,92.3,,1.0,0.0,11321.648,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,1,gsm8k_003,topic,48
+1.0,gsm8k,1.0,93.1,,1.0,0.0,11032.732,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",1,gsm8k_005,topic,16
+1.0,gsm8k,1.0,90.7,,1.0,0.0,10433.799,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",1,gsm8k_001,topic,7
+0.0,gsm8k,0.0,93.5,,0.0,0.0,52868.389,14,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,1,gsm8k_004,debate,16
+1.0,gsm8k,0.0,91.0,,0.0,0.0,51534.541,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,1,gsm8k_002,debate,150
+1.0,gsm8k,1.0,88.6,,1.0,0.0,54872.399,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,1,gsm8k_003,debate,48
+0.0,gsm8k,0.0,96.4,,0.0,0.0,53826.409,20,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",1,gsm8k_005,debate,16
+1.0,gsm8k,1.0,93.0,,1.0,0.0,48514.305,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",1,gsm8k_001,debate,7
+0.0,gsm8k,0.0,92.6,,0.0,0.0,11208.544,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,2,gsm8k_004,majority,16
+0.0,gsm8k,0.0,93.0,,0.0,0.0,12049.798,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,2,gsm8k_002,majority,150
+1.0,gsm8k,1.0,96.0,,1.0,0.0,9592.521,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,2,gsm8k_003,majority,48
+1.0,gsm8k,1.0,93.4,,1.0,0.0,11386.619,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",2,gsm8k_005,majority,16
+1.0,gsm8k,1.0,92.4,,1.0,0.0,10538.576,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",2,gsm8k_001,majority,7
+0.0,gsm8k,0.0,92.4,,0.0,0.0,11196.734,20,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,2,gsm8k_004,weighted,16
+0.0,gsm8k,1.0,93.1,,1.0,0.0,11774.774,150,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,2,gsm8k_002,weighted,150
+1.0,gsm8k,1.0,97.0,,1.0,0.0,9593.327,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,2,gsm8k_003,weighted,48
+1.0,gsm8k,1.0,94.1,,1.0,0.0,11251.575,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",2,gsm8k_005,weighted,16
+1.0,gsm8k,1.0,95.0,,1.0,0.0,11100.262,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",2,gsm8k_001,weighted,7
+0.0,gsm8k,0.0,99.1,,0.0,0.0,17501.789,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,2,gsm8k_004,isp,16
+0.0,gsm8k,1.0,95.2,,1.0,0.0,16343.365,150,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,2,gsm8k_002,isp,150
+1.0,gsm8k,1.0,96.6,,1.0,0.0,9838.331,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,2,gsm8k_003,isp,48
+1.0,gsm8k,1.0,94.6,,1.0,0.0,11730.437,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",2,gsm8k_005,isp,16
+1.0,gsm8k,1.0,93.9,,1.0,0.0,10927.698,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",2,gsm8k_001,isp,7
+0.0,gsm8k,0.0,76.2,,0.0,0.0,15139.277,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,2,gsm8k_004,topic,16
+1.0,gsm8k,0.0,90.7,,0.0,0.0,12086.701,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,2,gsm8k_002,topic,150
+1.0,gsm8k,1.0,90.2,,1.0,0.0,10495.3,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,2,gsm8k_003,topic,48
+1.0,gsm8k,1.0,93.0,,1.0,0.0,11218.274,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",2,gsm8k_005,topic,16
+1.0,gsm8k,1.0,90.7,,1.0,0.0,11206.301,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",2,gsm8k_001,topic,7
+0.0,gsm8k,0.0,94.1,,0.0,0.0,61340.759,14,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,2,gsm8k_004,debate,16
+1.0,gsm8k,0.0,93.6,,0.0,0.0,54055.228,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,2,gsm8k_002,debate,150
+1.0,gsm8k,1.0,90.8,,1.0,0.0,64058.981,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,2,gsm8k_003,debate,48
+0.0,gsm8k,0.0,93.5,,0.0,0.0,50149.114,20,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",2,gsm8k_005,debate,16
+1.0,gsm8k,1.0,95.8,,1.0,0.0,51179.993,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",2,gsm8k_001,debate,7
+0.0,gsm8k,0.0,97.9,,0.0,0.0,19971.907,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,3,gsm8k_004,majority,16
+0.0,gsm8k,0.0,93.1,,0.0,0.0,12237.362,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,3,gsm8k_002,majority,150
+1.0,gsm8k,1.0,96.1,,1.0,0.0,10118.084,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,3,gsm8k_003,majority,48
+1.0,gsm8k,1.0,95.3,,1.0,0.0,12222.863,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",3,gsm8k_005,majority,16
+1.0,gsm8k,1.0,96.1,,1.0,0.0,11804.727,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",3,gsm8k_001,majority,7
+0.0,gsm8k,0.0,94.1,,0.0,0.0,12102.611,20,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,3,gsm8k_004,weighted,16
+0.0,gsm8k,1.0,99.6,,1.0,0.0,17702.765,150,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,3,gsm8k_002,weighted,150
+1.0,gsm8k,1.0,99.9,,1.0,0.0,16309.062,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,3,gsm8k_003,weighted,48
+1.0,gsm8k,1.0,96.7,,1.0,0.0,13833.121,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",3,gsm8k_005,weighted,16
+1.0,gsm8k,1.0,99.7,,1.0,0.0,20714.056,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",3,gsm8k_001,weighted,7
+0.0,gsm8k,0.0,94.7,,0.0,0.0,14114.111,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,3,gsm8k_004,isp,16
+0.0,gsm8k,1.0,93.3,,1.0,0.0,12188.664,150,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,3,gsm8k_002,isp,150
+1.0,gsm8k,1.0,96.6,,1.0,0.0,10269.88,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,3,gsm8k_003,isp,48
+1.0,gsm8k,1.0,95.2,,1.0,0.0,12123.378,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",3,gsm8k_005,isp,16
+1.0,gsm8k,1.0,94.5,,1.0,0.0,11684.048,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",3,gsm8k_001,isp,7
+0.0,gsm8k,0.0,92.3,,0.0,0.0,22781.709,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,3,gsm8k_004,topic,16
+1.0,gsm8k,0.0,93.4,,0.0,0.0,18455.453,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,3,gsm8k_002,topic,150
+1.0,gsm8k,1.0,99.0,,1.0,0.0,16506.494,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,3,gsm8k_003,topic,48
+1.0,gsm8k,1.0,97.4,,1.0,0.0,18625.115,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",3,gsm8k_005,topic,16
+1.0,gsm8k,1.0,91.0,,1.0,0.0,11316.223,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",3,gsm8k_001,topic,7
+0.0,gsm8k,0.0,92.4,,0.0,0.0,53865.88,14,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,3,gsm8k_004,debate,16
+1.0,gsm8k,0.0,90.1,,0.0,0.0,51282.038,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,3,gsm8k_002,debate,150
+1.0,gsm8k,1.0,88.2,,1.0,0.0,55059.222,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,3,gsm8k_003,debate,48
+0.0,gsm8k,0.0,98.7,,0.0,0.0,79459.264,20,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",3,gsm8k_005,debate,16
+1.0,gsm8k,1.0,94.9,,1.0,0.0,62203.666,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",3,gsm8k_001,debate,7
+0.0,gsm8k,0.0,94.0,,0.0,0.0,12641.02,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,4,gsm8k_004,majority,16
+0.0,gsm8k,0.0,94.3,,0.0,0.0,12544.229,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,4,gsm8k_002,majority,150
+1.0,gsm8k,1.0,96.4,,1.0,0.0,9824.087,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,4,gsm8k_003,majority,48
+1.0,gsm8k,1.0,95.1,,1.0,0.0,11465.181,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",4,gsm8k_005,majority,16
+1.0,gsm8k,1.0,96.6,,1.0,0.0,12653.296,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",4,gsm8k_001,majority,7
+0.0,gsm8k,0.0,99.3,,0.0,0.0,20557.491,20,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,4,gsm8k_004,weighted,16
+0.0,gsm8k,1.0,99.0,,1.0,0.0,15265.0,150,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,4,gsm8k_002,weighted,150
+1.0,gsm8k,1.0,98.9,,1.0,0.0,19108.268,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,4,gsm8k_003,weighted,48
+1.0,gsm8k,1.0,94.4,,1.0,0.0,11836.472,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",4,gsm8k_005,weighted,16
+1.0,gsm8k,1.0,93.4,,1.0,0.0,10958.242,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",4,gsm8k_001,weighted,7
+0.0,gsm8k,0.0,93.6,,0.0,0.0,12328.401,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,4,gsm8k_004,isp,16
+0.0,gsm8k,1.0,95.5,,1.0,0.0,13848.627,150,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,4,gsm8k_002,isp,150
+1.0,gsm8k,1.0,96.3,,1.0,0.0,10051.261,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,4,gsm8k_003,isp,48
+1.0,gsm8k,1.0,95.3,,1.0,0.0,11569.182,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",4,gsm8k_005,isp,16
+1.0,gsm8k,1.0,93.4,,1.0,0.0,10694.185,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",4,gsm8k_001,isp,7
+0.0,gsm8k,0.0,72.5,,0.0,0.0,17330.196,12,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,4,gsm8k_004,topic,16
+1.0,gsm8k,0.0,92.6,,0.0,0.0,12301.121,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,4,gsm8k_002,topic,150
+1.0,gsm8k,1.0,91.9,,1.0,0.0,11152.669,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,4,gsm8k_003,topic,48
+1.0,gsm8k,1.0,93.5,,1.0,0.0,11689.948,16,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",4,gsm8k_005,topic,16
+1.0,gsm8k,1.0,90.6,,1.0,0.0,11018.687,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",4,gsm8k_001,topic,7
+0.0,gsm8k,0.0,93.3,,0.0,0.0,53457.198,14,Tom buys 3 notebooks for $4 each and 2 pens for $2 each. How much total did he spend? Return only the number.,4,gsm8k_004,debate,16
+1.0,gsm8k,0.0,90.7,,0.0,0.0,52339.637,300,A train travels 60 miles in 2 hours at constant speed. How far will it travel in 5 hours? Return only the number.,4,gsm8k_002,debate,150
+1.0,gsm8k,1.0,89.0,,1.0,0.0,56035.235,48,There are 8 boxes with 6 pencils each. How many pencils total? Return only the number.,4,gsm8k_003,debate,48
+0.0,gsm8k,0.0,94.2,,0.0,0.0,54804.775,20,"A class has 24 students. If 1/3 are absent, how many are present? Return only the number.",4,gsm8k_005,debate,16
+1.0,gsm8k,1.0,92.8,,1.0,0.0,49595.574,7,"If Alice has 12 apples and gives 5 to Bob, how many apples does she have left? Return only the number.",4,gsm8k_001,debate,7

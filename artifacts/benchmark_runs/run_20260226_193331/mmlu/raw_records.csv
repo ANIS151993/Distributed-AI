@@ -1,0 +1,751 @@
+agreement_rate,benchmark,correct,cpu_percent,error,f1,gpu_util_percent,latency_ms,prediction,prompt,repetition,sample_id,strategy,truth
+1.0,mmlu,1.0,10.5,,1.0,0.0,12960.084,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",0,mmlu_004,majority,b
+1.0,mmlu,1.0,94.0,,1.0,0.0,13412.096,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",0,mmlu_002,majority,b
+1.0,mmlu,1.0,90.3,,1.0,0.0,9726.458,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",0,mmlu_003,majority,a
+1.0,mmlu,1.0,94.8,,1.0,0.0,12672.742,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",0,mmlu_005,majority,c
+1.0,mmlu,1.0,96.7,,1.0,0.0,11750.394,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",0,mmlu_001,majority,c
+1.0,mmlu,1.0,95.2,,1.0,0.0,12714.769,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",0,mmlu_004,weighted,b
+1.0,mmlu,1.0,94.4,,1.0,0.0,13794.854,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",0,mmlu_002,weighted,b
+1.0,mmlu,1.0,90.8,,1.0,0.0,9604.703,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",0,mmlu_003,weighted,a
+1.0,mmlu,1.0,94.6,,1.0,0.0,12641.569,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",0,mmlu_005,weighted,c
+1.0,mmlu,1.0,96.5,,1.0,0.0,11798.138,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",0,mmlu_001,weighted,c
+1.0,mmlu,1.0,95.4,,1.0,0.0,12904.925,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",0,mmlu_004,isp,b
+1.0,mmlu,1.0,93.8,,1.0,0.0,13253.232,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",0,mmlu_002,isp,b
+1.0,mmlu,1.0,90.4,,1.0,0.0,9410.453,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",0,mmlu_003,isp,a
+1.0,mmlu,1.0,94.6,,1.0,0.0,12366.013,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",0,mmlu_005,isp,c
+1.0,mmlu,1.0,96.5,,1.0,0.0,11480.696,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",0,mmlu_001,isp,c
+1.0,mmlu,1.0,73.0,,1.0,0.0,16462.134,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",0,mmlu_004,topic,b
+1.0,mmlu,1.0,95.3,,1.0,0.0,12467.305,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",0,mmlu_002,topic,b
+1.0,mmlu,1.0,86.4,,1.0,0.0,10392.759,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",0,mmlu_003,topic,a
+1.0,mmlu,1.0,94.7,,1.0,0.0,11772.291,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",0,mmlu_005,topic,c
+1.0,mmlu,1.0,94.8,,1.0,0.0,11547.199,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",0,mmlu_001,topic,c
+1.0,mmlu,1.0,92.6,,1.0,0.0,48354.267,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",0,mmlu_004,debate,b
+0.0,mmlu,1.0,91.8,,1.0,0.0,55879.995,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",0,mmlu_002,debate,b
+1.0,mmlu,1.0,92.9,,1.0,0.0,49101.961,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",0,mmlu_003,debate,a
+1.0,mmlu,1.0,96.7,,1.0,0.0,46773.688,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",0,mmlu_005,debate,c
+1.0,mmlu,1.0,91.6,,1.0,0.0,46831.223,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",0,mmlu_001,debate,c
+1.0,mmlu,1.0,94.6,,1.0,0.0,12641.269,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",1,mmlu_004,majority,b
+1.0,mmlu,1.0,93.9,,1.0,0.0,13085.266,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",1,mmlu_002,majority,b
+1.0,mmlu,1.0,89.5,,1.0,0.0,9468.291,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",1,mmlu_003,majority,a
+1.0,mmlu,1.0,94.4,,1.0,0.0,12275.314,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",1,mmlu_005,majority,c
+1.0,mmlu,1.0,96.3,,1.0,0.0,11766.191,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",1,mmlu_001,majority,c
+1.0,mmlu,1.0,94.7,,1.0,0.0,12362.745,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",1,mmlu_004,weighted,b
+1.0,mmlu,1.0,93.6,,1.0,0.0,13170.234,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",1,mmlu_002,weighted,b
+1.0,mmlu,1.0,90.2,,1.0,0.0,9418.73,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",1,mmlu_003,weighted,a
+1.0,mmlu,1.0,94.6,,1.0,0.0,12321.471,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",1,mmlu_005,weighted,c
+1.0,mmlu,1.0,96.5,,1.0,0.0,11497.875,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",1,mmlu_001,weighted,c
+1.0,mmlu,1.0,94.8,,1.0,0.0,12439.364,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",1,mmlu_004,isp,b
+1.0,mmlu,1.0,93.7,,1.0,0.0,13160.79,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",1,mmlu_002,isp,b
+1.0,mmlu,1.0,89.5,,1.0,0.0,9488.437,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",1,mmlu_003,isp,a
+1.0,mmlu,1.0,94.9,,1.0,0.0,12436.524,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",1,mmlu_005,isp,c
+1.0,mmlu,1.0,96.9,,1.0,0.0,11589.441,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",1,mmlu_001,isp,c
+1.0,mmlu,1.0,87.5,,1.0,0.0,22691.702,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",1,mmlu_004,topic,b
+1.0,mmlu,1.0,96.5,,1.0,0.0,19723.149,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",1,mmlu_002,topic,b
+1.0,mmlu,1.0,93.3,,1.0,0.0,15000.169,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",1,mmlu_003,topic,a
+1.0,mmlu,1.0,99.8,,1.0,0.0,24381.005,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",1,mmlu_005,topic,c
+1.0,mmlu,1.0,97.7,,1.0,0.0,20579.596,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",1,mmlu_001,topic,c
+1.0,mmlu,1.0,99.5,,1.0,0.0,87163.193,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",1,mmlu_004,debate,b
+0.0,mmlu,1.0,99.0,,1.0,0.0,96413.142,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",1,mmlu_002,debate,b
+1.0,mmlu,1.0,93.1,,1.0,0.0,50055.581,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",1,mmlu_003,debate,a
+1.0,mmlu,1.0,96.7,,1.0,0.0,47212.433,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",1,mmlu_005,debate,c
+1.0,mmlu,1.0,91.8,,1.0,0.0,48406.67,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",1,mmlu_001,debate,c
+1.0,mmlu,1.0,95.2,,1.0,0.0,12774.691,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",2,mmlu_004,majority,b
+1.0,mmlu,1.0,94.1,,1.0,0.0,13355.172,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",2,mmlu_002,majority,b
+1.0,mmlu,1.0,89.7,,1.0,0.0,9477.379,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",2,mmlu_003,majority,a
+1.0,mmlu,1.0,94.6,,1.0,0.0,12419.658,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",2,mmlu_005,majority,c
+1.0,mmlu,1.0,96.5,,1.0,0.0,11835.318,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",2,mmlu_001,majority,c
+1.0,mmlu,1.0,95.0,,1.0,0.0,12466.207,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",2,mmlu_004,weighted,b
+1.0,mmlu,1.0,93.8,,1.0,0.0,13410.958,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",2,mmlu_002,weighted,b
+1.0,mmlu,1.0,89.7,,1.0,0.0,9442.67,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",2,mmlu_003,weighted,a
+1.0,mmlu,1.0,94.8,,1.0,0.0,12339.789,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",2,mmlu_005,weighted,c
+1.0,mmlu,1.0,96.9,,1.0,0.0,12863.501,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",2,mmlu_001,weighted,c
+1.0,mmlu,1.0,95.4,,1.0,0.0,13456.859,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",2,mmlu_004,isp,b
+1.0,mmlu,1.0,95.1,,1.0,0.0,14865.876,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",2,mmlu_002,isp,b
+1.0,mmlu,1.0,92.9,,1.0,0.0,10337.012,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",2,mmlu_003,isp,a
+1.0,mmlu,1.0,94.6,,1.0,0.0,12922.492,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",2,mmlu_005,isp,c
+1.0,mmlu,1.0,96.3,,1.0,0.0,11858.567,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",2,mmlu_001,isp,c
+1.0,mmlu,1.0,72.4,,1.0,0.0,16519.042,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",2,mmlu_004,topic,b
+1.0,mmlu,1.0,94.9,,1.0,0.0,12527.679,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",2,mmlu_002,topic,b
+1.0,mmlu,1.0,85.7,,1.0,0.0,10249.782,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",2,mmlu_003,topic,a
+1.0,mmlu,1.0,95.4,,1.0,0.0,11961.169,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",2,mmlu_005,topic,c
+1.0,mmlu,1.0,94.6,,1.0,0.0,11772.424,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",2,mmlu_001,topic,c
+1.0,mmlu,1.0,92.3,,1.0,0.0,48747.317,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",2,mmlu_004,debate,b
+0.0,mmlu,1.0,93.3,,1.0,0.0,66182.052,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",2,mmlu_002,debate,b
+1.0,mmlu,1.0,94.7,,1.0,0.0,53289.661,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",2,mmlu_003,debate,a
+1.0,mmlu,1.0,99.0,,1.0,0.0,74545.876,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",2,mmlu_005,debate,c
+1.0,mmlu,1.0,99.9,,1.0,0.0,89300.022,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",2,mmlu_001,debate,c
+1.0,mmlu,1.0,100.0,,1.0,0.0,23504.725,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",3,mmlu_004,majority,b
+1.0,mmlu,1.0,100.0,,1.0,0.0,24605.765,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",3,mmlu_002,majority,b
+1.0,mmlu,1.0,99.9,,1.0,0.0,15988.798,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",3,mmlu_003,majority,a
+1.0,mmlu,1.0,100.0,,1.0,0.0,23477.191,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",3,mmlu_005,majority,c
+1.0,mmlu,1.0,100.0,,1.0,0.0,23186.211,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",3,mmlu_001,majority,c
+1.0,mmlu,1.0,100.0,,1.0,0.0,22756.952,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",3,mmlu_004,weighted,b
+1.0,mmlu,1.0,100.0,,1.0,0.0,24737.465,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",3,mmlu_002,weighted,b
+1.0,mmlu,1.0,99.9,,1.0,0.0,16047.249,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",3,mmlu_003,weighted,a
+1.0,mmlu,1.0,99.9,,1.0,0.0,22156.365,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",3,mmlu_005,weighted,c
+1.0,mmlu,1.0,100.0,,1.0,0.0,22685.256,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",3,mmlu_001,weighted,c
+1.0,mmlu,1.0,100.0,,1.0,0.0,25130.092,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",3,mmlu_004,isp,b
+1.0,mmlu,1.0,100.0,,1.0,0.0,25637.861,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",3,mmlu_002,isp,b
+1.0,mmlu,1.0,100.0,,1.0,0.0,16002.241,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",3,mmlu_003,isp,a
+1.0,mmlu,1.0,100.0,,1.0,0.0,24741.918,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",3,mmlu_005,isp,c
+1.0,mmlu,1.0,100.0,,1.0,0.0,23801.547,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",3,mmlu_001,isp,c
+1.0,mmlu,1.0,99.9,,1.0,0.0,30208.477,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",3,mmlu_004,topic,b
+1.0,mmlu,1.0,99.6,,1.0,0.0,25211.942,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",3,mmlu_002,topic,b
+1.0,mmlu,1.0,99.9,,1.0,0.0,19297.921,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",3,mmlu_003,topic,a
+1.0,mmlu,1.0,99.9,,1.0,0.0,23498.827,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",3,mmlu_005,topic,c
+1.0,mmlu,1.0,99.9,,1.0,0.0,23539.404,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",3,mmlu_001,topic,c
+1.0,mmlu,1.0,99.9,,1.0,0.0,86072.51,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",3,mmlu_004,debate,b
+0.0,mmlu,1.0,99.4,,1.0,0.0,95144.493,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",3,mmlu_002,debate,b
+1.0,mmlu,1.0,99.8,,1.0,0.0,83894.119,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",3,mmlu_003,debate,a
+1.0,mmlu,1.0,100.0,,1.0,0.0,81236.928,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",3,mmlu_005,debate,c
+1.0,mmlu,1.0,99.8,,1.0,0.0,83702.929,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",3,mmlu_001,debate,c
+1.0,mmlu,1.0,100.0,,1.0,0.0,27572.229,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",4,mmlu_004,majority,b
+1.0,mmlu,1.0,100.0,,1.0,0.0,32776.297,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",4,mmlu_002,majority,b
+1.0,mmlu,1.0,100.0,,1.0,0.0,17772.048,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",4,mmlu_003,majority,a
+1.0,mmlu,1.0,100.0,,1.0,0.0,27813.834,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",4,mmlu_005,majority,c
+1.0,mmlu,1.0,99.8,,1.0,0.0,21246.359,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",4,mmlu_001,majority,c
+1.0,mmlu,1.0,99.9,,1.0,0.0,22628.097,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",4,mmlu_004,weighted,b
+1.0,mmlu,1.0,100.0,,1.0,0.0,28635.976,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",4,mmlu_002,weighted,b
+1.0,mmlu,1.0,95.1,,1.0,0.0,13476.889,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",4,mmlu_003,weighted,a
+1.0,mmlu,1.0,98.6,,1.0,0.0,19489.588,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",4,mmlu_005,weighted,c
+1.0,mmlu,1.0,97.8,,1.0,0.0,15584.729,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",4,mmlu_001,weighted,c
+1.0,mmlu,1.0,98.3,,1.0,0.0,20273.467,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",4,mmlu_004,isp,b
+1.0,mmlu,1.0,96.6,,1.0,0.0,17346.509,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",4,mmlu_002,isp,b
+1.0,mmlu,1.0,91.2,,1.0,0.0,12506.254,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",4,mmlu_003,isp,a
+1.0,mmlu,1.0,96.7,,1.0,0.0,16261.771,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",4,mmlu_005,isp,c
+1.0,mmlu,1.0,98.6,,1.0,0.0,15005.191,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",4,mmlu_001,isp,c
+1.0,mmlu,1.0,94.0,,1.0,0.0,22769.027,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",4,mmlu_004,topic,b
+1.0,mmlu,1.0,96.0,,1.0,0.0,17903.338,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",4,mmlu_002,topic,b
+1.0,mmlu,1.0,88.9,,1.0,0.0,14838.948,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",4,mmlu_003,topic,a
+1.0,mmlu,1.0,97.7,,1.0,0.0,16752.041,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",4,mmlu_005,topic,c
+1.0,mmlu,1.0,96.3,,1.0,0.0,16612.264,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",4,mmlu_001,topic,c
+1.0,mmlu,1.0,95.4,,1.0,0.0,60168.747,b,"What is 15 * 3?
+A. 30
+B. 45
+C. 35
+D. 60
+Answer with only the option letter.",4,mmlu_004,debate,b
+0.0,mmlu,1.0,97.1,,1.0,0.0,85652.162,b,"Which gas is most abundant in Earth's atmosphere?
+A. Oxygen
+B. Nitrogen
+C. Carbon dioxide
+D. Argon
+Answer with only the option letter.",4,mmlu_002,debate,b
+1.0,mmlu,1.0,99.0,,1.0,0.0,61031.303,a,"Who wrote 'Pride and Prejudice'?
+A. Jane Austen
+B. Charles Dickens
+C. Mark Twain
+D. Virginia Woolf
+Answer with only the option letter.",4,mmlu_003,debate,a
+1.0,mmlu,1.0,97.9,,1.0,0.0,54580.75,c,"Which organ pumps blood through the body?
+A. Liver
+B. Kidney
+C. Heart
+D. Lung
+Answer with only the option letter.",4,mmlu_005,debate,c
+1.0,mmlu,1.0,92.5,,1.0,0.0,48944.836,c,"What is the capital of Japan?
+A. Beijing
+B. Seoul
+C. Tokyo
+D. Bangkok
+Answer with only the option letter.",4,mmlu_001,debate,c

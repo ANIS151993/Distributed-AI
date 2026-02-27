@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lcccccc}
+\hline
+Strategy & Accuracy & F1 & Latency(ms) & Latency SD & Agreement & 95\% CI \\
+\hline
+majority & 0.800 & 0.800 & 13219.0 & 3880.5 & 0.800 & [0.631, 0.969] \\
+weighted & 1.000 & 1.000 & 12597.3 & 2418.2 & 0.800 & [1.000, 1.000] \\
+isp & 1.000 & 1.000 & 13456.3 & 4025.0 & 0.800 & [1.000, 1.000] \\
+topic & 0.960 & 0.960 & 15219.9 & 5112.8 & 0.800 & [0.877, 1.043] \\
+debate & 0.600 & 0.600 & 57227.1 & 10362.6 & 0.800 & [0.394, 0.806] \\
+\hline
+\end{tabular}
+\caption{truthfulqa results for ensemble strategies}
+\label{tab:truthfulqa_summary}
+\end{table}

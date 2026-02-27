@@ -1,0 +1,72 @@
+[
+  {
+    "benchmark": "gsm8k",
+    "strategy": "majority",
+    "n": 25,
+    "accuracy": 0.6,
+    "f1": 0.6,
+    "latency_mean_ms": 11637.811959999999,
+    "latency_std_ms": 1980.2985506813627,
+    "agreement_rate": 0.6,
+    "cpu_mean": 94.264,
+    "gpu_util_mean": 0.0,
+    "accuracy_ci_low": 0.39361014383719795,
+    "accuracy_ci_high": 0.806389856162802
+  },
+  {
+    "benchmark": "gsm8k",
+    "strategy": "weighted",
+    "n": 25,
+    "accuracy": 0.8,
+    "f1": 0.8,
+    "latency_mean_ms": 12952.785080000001,
+    "latency_std_ms": 3326.2937030317357,
+    "agreement_rate": 0.6,
+    "cpu_mean": 95.36800000000001,
+    "gpu_util_mean": 0.0,
+    "accuracy_ci_low": 0.631483388104907,
+    "accuracy_ci_high": 0.9685166118950931
+  },
+  {
+    "benchmark": "gsm8k",
+    "strategy": "isp",
+    "n": 25,
+    "accuracy": 0.8,
+    "f1": 0.8,
+    "latency_mean_ms": 11935.73512,
+    "latency_std_ms": 1931.8807780781342,
+    "agreement_rate": 0.6,
+    "cpu_mean": 94.736,
+    "gpu_util_mean": 0.0,
+    "accuracy_ci_low": 0.631483388104907,
+    "accuracy_ci_high": 0.9685166118950931
+  },
+  {
+    "benchmark": "gsm8k",
+    "strategy": "topic",
+    "n": 25,
+    "accuracy": 0.6,
+    "f1": 0.6,
+    "latency_mean_ms": 13374.217839999998,
+    "latency_std_ms": 3295.0317955864843,
+    "agreement_rate": 0.8,
+    "cpu_mean": 89.56800000000001,
+    "gpu_util_mean": 0.0,
+    "accuracy_ci_low": 0.39361014383719795,
+    "accuracy_ci_high": 0.806389856162802
+  },
+  {
+    "benchmark": "gsm8k",
+    "strategy": "debate",
+    "n": 25,
+    "accuracy": 0.4,
+    "f1": 0.4,
+    "latency_mean_ms": 54589.582400000014,
+    "latency_std_ms": 6530.343325757433,
+    "agreement_rate": 0.6,
+    "cpu_mean": 92.44400000000002,
+    "gpu_util_mean": 0.0,
+    "accuracy_ci_low": 0.19361014383719796,
+    "accuracy_ci_high": 0.606389856162802
+  }
+]

@@ -1,0 +1,6 @@
+accuracy,accuracy_ci_high,accuracy_ci_low,agreement_rate,benchmark,cpu_mean,f1,gpu_util_mean,latency_mean_ms,latency_std_ms,n,strategy
+1.0,1.0,1.0,0.5,gsm8k,1.5,1.0,0.0,55844.721,0.0,1,majority
+1.0,1.0,1.0,0.5,gsm8k,1.5,1.0,0.0,55844.721,0.0,1,weighted
+1.0,1.0,1.0,0.5,gsm8k,1.5,1.0,0.0,55844.721,0.0,1,isp
+1.0,1.0,1.0,0.5,gsm8k,1.5,1.0,0.0,55844.721,0.0,1,topic
+1.0,1.0,1.0,1.0,gsm8k,0.5,1.0,0.0,47621.866,0.0,1,debate

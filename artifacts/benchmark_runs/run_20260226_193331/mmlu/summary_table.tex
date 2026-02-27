@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lcccccc}
+\hline
+Strategy & Accuracy & F1 & Latency(ms) & Latency SD & Agreement & 95\% CI \\
+\hline
+majority & 1.000 & 1.000 & 16702.6 & 6708.1 & 1.000 & [1.000, 1.000] \\
+weighted & 1.000 & 1.000 & 15521.9 & 5363.7 & 1.000 & [1.000, 1.000] \\
+isp & 1.000 & 1.000 & 15147.1 & 4935.4 & 1.000 & [1.000, 1.000] \\
+topic & 1.000 & 1.000 & 17547.2 & 5457.6 & 1.000 & [1.000, 1.000] \\
+debate & 1.000 & 1.000 & 65947.4 & 18010.8 & 0.800 & [1.000, 1.000] \\
+\hline
+\end{tabular}
+\caption{mmlu results for ensemble strategies}
+\label{tab:mmlu_summary}
+\end{table}

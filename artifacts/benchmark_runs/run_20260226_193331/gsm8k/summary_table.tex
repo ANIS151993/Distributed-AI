@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lcccccc}
+\hline
+Strategy & Accuracy & F1 & Latency(ms) & Latency SD & Agreement & 95\% CI \\
+\hline
+majority & 0.600 & 0.600 & 11637.8 & 1980.3 & 0.600 & [0.394, 0.806] \\
+weighted & 0.800 & 0.800 & 12952.8 & 3326.3 & 0.600 & [0.631, 0.969] \\
+isp & 0.800 & 0.800 & 11935.7 & 1931.9 & 0.600 & [0.631, 0.969] \\
+topic & 0.600 & 0.600 & 13374.2 & 3295.0 & 0.800 & [0.394, 0.806] \\
+debate & 0.400 & 0.400 & 54589.6 & 6530.3 & 0.600 & [0.194, 0.606] \\
+\hline
+\end{tabular}
+\caption{gsm8k results for ensemble strategies}
+\label{tab:gsm8k_summary}
+\end{table}

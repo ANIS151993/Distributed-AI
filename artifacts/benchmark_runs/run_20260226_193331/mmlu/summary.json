@@ -1,0 +1,72 @@
+[
+  {
+    "benchmark": "mmlu",
+    "strategy": "majority",
+    "n": 25,
+    "accuracy": 1.0,
+    "f1": 1.0,
+    "latency_mean_ms": 16702.5512,
+    "latency_std_ms": 6708.055199844984,
+    "agreement_rate": 1.0,
+    "cpu_mean": 92.992,
+    "gpu_util_mean": 0.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0
+  },
+  {
+    "benchmark": "mmlu",
+    "strategy": "weighted",
+    "n": 25,
+    "accuracy": 1.0,
+    "f1": 1.0,
+    "latency_mean_ms": 15521.871160000002,
+    "latency_std_ms": 5363.6923109096115,
+    "agreement_rate": 1.0,
+    "cpu_mean": 96.10000000000002,
+    "gpu_util_mean": 0.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0
+  },
+  {
+    "benchmark": "mmlu",
+    "strategy": "isp",
+    "n": 25,
+    "accuracy": 1.0,
+    "f1": 1.0,
+    "latency_mean_ms": 15147.101280000003,
+    "latency_std_ms": 4935.414184724795,
+    "agreement_rate": 1.0,
+    "cpu_mean": 95.84799999999997,
+    "gpu_util_mean": 0.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0
+  },
+  {
+    "benchmark": "mmlu",
+    "strategy": "topic",
+    "n": 25,
+    "accuracy": 1.0,
+    "f1": 1.0,
+    "latency_mean_ms": 17547.183759999996,
+    "latency_std_ms": 5457.580227551845,
+    "agreement_rate": 1.0,
+    "cpu_mean": 93.36400000000002,
+    "gpu_util_mean": 0.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0
+  },
+  {
+    "benchmark": "mmlu",
+    "strategy": "debate",
+    "n": 25,
+    "accuracy": 1.0,
+    "f1": 1.0,
+    "latency_mean_ms": 65947.43432,
+    "latency_std_ms": 18010.785620703307,
+    "agreement_rate": 0.8,
+    "cpu_mean": 96.22800000000001,
+    "gpu_util_mean": 0.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0
+  }
+]

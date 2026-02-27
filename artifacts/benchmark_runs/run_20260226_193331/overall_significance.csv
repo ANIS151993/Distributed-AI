@@ -1,0 +1,13 @@
+benchmark,comparison,mean_delta,paired_t_p,paired_t_stat,significant_paired_t_0.05,significant_wilcoxon_0.05,wilcoxon_p,wilcoxon_stat
+mmlu,weighted vs majority,0.0,nan,nan,False,False,,
+mmlu,isp vs majority,0.0,nan,nan,False,False,,
+mmlu,topic vs majority,0.0,nan,nan,False,False,,
+mmlu,debate vs majority,0.0,nan,nan,False,False,,
+gsm8k,weighted vs majority,0.2,0.02198299704410233,2.4494897427831774,True,True,0.025347318677468252,0.0
+gsm8k,isp vs majority,0.2,0.02198299704410233,2.4494897427831774,True,True,0.025347318677468252,0.0
+gsm8k,topic vs majority,0.0,nan,nan,False,False,,
+gsm8k,debate vs majority,-0.2,0.02198299704410233,-2.4494897427831774,True,True,0.025347318677468252,0.0
+truthfulqa,weighted vs majority,0.2,0.02198299704410233,2.4494897427831774,True,True,0.025347318677468252,0.0
+truthfulqa,isp vs majority,0.2,0.02198299704410233,2.4494897427831774,True,True,0.025347318677468252,0.0
+truthfulqa,topic vs majority,0.16,0.04289600309206789,2.138089935299395,True,True,0.04550026389635839,0.0
+truthfulqa,debate vs majority,-0.2,0.02198299704410233,-2.4494897427831774,True,True,0.025347318677468252,0.0

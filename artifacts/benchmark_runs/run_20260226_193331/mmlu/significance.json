@@ -1,0 +1,46 @@
+[
+  {
+    "benchmark": "mmlu",
+    "comparison": "weighted vs majority",
+    "paired_t_p": NaN,
+    "paired_t_stat": NaN,
+    "wilcoxon_p": null,
+    "wilcoxon_stat": null,
+    "mean_delta": 0.0,
+    "significant_paired_t_0.05": false,
+    "significant_wilcoxon_0.05": false
+  },
+  {
+    "benchmark": "mmlu",
+    "comparison": "isp vs majority",
+    "paired_t_p": NaN,
+    "paired_t_stat": NaN,
+    "wilcoxon_p": null,
+    "wilcoxon_stat": null,
+    "mean_delta": 0.0,
+    "significant_paired_t_0.05": false,
+    "significant_wilcoxon_0.05": false
+  },
+  {
+    "benchmark": "mmlu",
+    "comparison": "topic vs majority",
+    "paired_t_p": NaN,
+    "paired_t_stat": NaN,
+    "wilcoxon_p": null,
+    "wilcoxon_stat": null,
+    "mean_delta": 0.0,
+    "significant_paired_t_0.05": false,
+    "significant_wilcoxon_0.05": false
+  },
+  {
+    "benchmark": "mmlu",
+    "comparison": "debate vs majority",
+    "paired_t_p": NaN,
+    "paired_t_stat": NaN,
+    "wilcoxon_p": null,
+    "wilcoxon_stat": null,
+    "mean_delta": 0.0,
+    "significant_paired_t_0.05": false,
+    "significant_wilcoxon_0.05": false
+  }
+]

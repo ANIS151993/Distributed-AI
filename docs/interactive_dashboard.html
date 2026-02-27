@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Distributed AI Interactive Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="assets/data/report_data.js"></script>
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --ink: #1a1f2b;
+      --muted: #5f697a;
+      --card: #ffffff;
+      --line: #d9d7cf;
+      --accent: #0b6e4f;
+      --accent2: #4f46e5;
+      --accent3: #d97706;
+      --accent4: #0ea5e9;
+      --accent5: #dc2626;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top right, #fffdf6, var(--bg));
+      color: var(--ink);
+    }
+    header {
+      padding: 28px 22px 8px;
+    }
+    h1 { margin: 0; font-size: 28px; }
+    .sub { margin-top: 6px; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      padding: 14px 22px 22px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 5px 16px rgba(0,0,0,0.04);
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: 0.2px;
+    }
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    select {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 7px 9px;
+      background: #fff;
+      color: var(--ink);
+    }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      gap: 8px;
+    }
+    .kpi {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fcfcfb;
+    }
+    .kpi .v { font-size: 20px; font-weight: 700; }
+    .kpi .l { color: var(--muted); font-size: 12px; }
+
+    @media (max-width: 980px) {
+      .span-8, .span-6, .span-4 { grid-column: span 12; }
+      .kpis { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Distributed AI Ensemble Dashboard</h1>
+    <div class="sub">Interactive visualization of benchmark run <code id="runId"></code></div>
+  </header>
+
+  <section class="grid">
+    <article class="card span-12">
+      <div class="controls">
+        <label for="benchmarkSel">Benchmark</label>
+        <select id="benchmarkSel"></select>
+        <label for="metricSel">Metric</label>
+        <select id="metricSel">
+          <option value="accuracy">Accuracy</option>
+          <option value="f1">F1</option>
+          <option value="agreement">Agreement</option>
+          <option value="latency_ms">Latency (ms)</option>
+        </select>
+      </div>
+      <div class="kpis" id="kpis"></div>
+    </article>
+
+    <article class="card span-8">
+      <h3>Benchmark-Strategy Comparison (Bar)</h3>
+      <canvas id="barChart"></canvas>
+    </article>
+
+    <article class="card span-4">
+      <h3>Average Accuracy Share (Pie)</h3>
+      <canvas id="pieChart"></canvas>
+    </article>
+
+    <article class="card span-6">
+      <h3>Latency Trend Across Strategies (Line)</h3>
+      <canvas id="latencyChart"></canvas>
+    </article>
+
+    <article class="card span-6">
+      <h3>Progress Chart: GSM8K Cumulative Accuracy</h3>
+      <canvas id="progressChart"></canvas>
+    </article>
+
+    <article class="card span-12">
+      <h3>Optimization Progress (Baseline vs Optimized)</h3>
+      <canvas id="optChart"></canvas>
+    </article>
+  </section>
+
+  <script>
+    const data = window.REPORT_DATA;
+    document.getElementById('runId').textContent = data.run_id;
+
+    const palette = ['#0b6e4f', '#4f46e5', '#d97706', '#0ea5e9', '#dc2626'];
+    const benchmarkSel = document.getElementById('benchmarkSel');
+    const metricSel = document.getElementById('metricSel');
+
+    data.benchmarks.forEach((b) => {
+      const o = document.createElement('option');
+      o.value = b;
+      o.textContent = b.toUpperCase();
+      benchmarkSel.appendChild(o);
+    });
+    benchmarkSel.value = data.benchmarks[0];
+
+    const barCtx = document.getElementById('barChart');
+    const pieCtx = document.getElementById('pieChart');
+    const latCtx = document.getElementById('latencyChart');
+    const progCtx = document.getElementById('progressChart');
+    const optCtx = document.getElementById('optChart');
+
+    function valuesFor(metric, benchmark) {
+      const source = data[metric];
+      return data.strategies.map((s) => source?.[benchmark]?.[s] ?? 0);
+    }
+
+    const barChart = new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: data.strategies.map((s) => s.toUpperCase()),
+        datasets: [{
+          label: 'Metric',
+          data: valuesFor('accuracy', benchmarkSel.value),
+          backgroundColor: palette,
+        }],
+      },
+      options: { responsive: true, scales: { y: { beginAtZero: true } } },
+    });
+
+    const pieChart = new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: data.strategies.map((s) => s.toUpperCase()),
+        datasets: [{ data: data.strategies.map((s) => data.avg_accuracy[s] ?? 0), backgroundColor: palette }],
+      },
+      options: { responsive: true },
+    });
+
+    const latencyChart = new Chart(latCtx, {
+      type: 'line',
+      data: {
+        labels: data.strategies.map((s) => s.toUpperCase()),
+        datasets: data.benchmarks.map((b, i) => ({
+          label: b.toUpperCase(),
+          data: data.strategies.map((s) => data.latency_ms[b][s]),
+          borderColor: palette[i],
+          backgroundColor: palette[i],
+          tension: 0.25,
+        })),
+      },
+      options: { responsive: true },
+    });
+
+    const progressChart = new Chart(progCtx, {
+      type: 'line',
+      data: {
+        labels: Array.from({ length: Math.max(...Object.values(data.progress_gsm8k).map(v => v.length || 0)) }, (_, i) => i + 1),
+        datasets: data.strategies.map((s, i) => ({
+          label: s.toUpperCase(),
+          data: data.progress_gsm8k[s] || [],
+          borderColor: palette[i],
+          backgroundColor: palette[i],
+          tension: 0.2,
+        })),
+      },
+      options: { responsive: true, scales: { y: { min: 0, max: 1 } } },
+    });
+
+    function buildOptChart() {
+      const baseLat = Object.fromEntries(
+        data.strategies.map((s) => [s, Number(data.optimization?.baseline?.[s]?.latency_mean_ms || 0)])
+      );
+      const optLat = Object.fromEntries(
+        data.strategies.map((s) => [s, Number(data.optimization?.optimized?.[s]?.latency_mean_ms || 0)])
+      );
+
+      new Chart(optCtx, {
+        type: 'bar',
+        data: {
+          labels: data.strategies.map(s => s.toUpperCase()),
+          datasets: [
+            { label: 'Baseline Latency (ms)', data: data.strategies.map(s => baseLat[s] ?? 0), backgroundColor: '#7c3aed' },
+            { label: 'Optimized Latency (ms)', data: data.strategies.map(s => optLat[s] ?? 0), backgroundColor: '#0b6e4f' },
+          ],
+        },
+        options: { responsive: true },
+      });
+    }
+
+    function updateKpis() {
+      const b = benchmarkSel.value;
+      const metric = metricSel.value;
+      const vals = valuesFor(metric, b);
+      const maxVal = Math.max(...vals);
+      const best = data.strategies[vals.indexOf(maxVal)];
+
+      const avgAcc = (data.strategies.reduce((s, st) => s + (data.accuracy[b][st] || 0), 0) / data.strategies.length).toFixed(3);
+      const avgLat = (data.strategies.reduce((s, st) => s + (data.latency_ms[b][st] || 0), 0) / data.strategies.length).toFixed(1);
+
+      document.getElementById('kpis').innerHTML = `
+        <div class="kpi"><div class="v">${b.toUpperCase()}</div><div class="l">Selected benchmark</div></div>
+        <div class="kpi"><div class="v">${best.toUpperCase()}</div><div class="l">Best strategy (${metric})</div></div>
+        <div class="kpi"><div class="v">${avgAcc}</div><div class="l">Avg accuracy</div></div>
+        <div class="kpi"><div class="v">${avgLat}</div><div class="l">Avg latency (ms)</div></div>
+      `;
+    }
+
+    function refreshBar() {
+      const b = benchmarkSel.value;
+      const metric = metricSel.value;
+      barChart.data.datasets[0].label = `${b.toUpperCase()} ${metric}`;
+      barChart.data.datasets[0].data = valuesFor(metric, b);
+      barChart.options.scales.y.max = metric === 'latency_ms' ? undefined : 1.05;
+      barChart.update();
+      updateKpis();
+    }
+
+    benchmarkSel.addEventListener('change', refreshBar);
+    metricSel.addEventListener('change', refreshBar);
+
+    refreshBar();
+    buildOptChart();
+  </script>
+</body>
+</html>
