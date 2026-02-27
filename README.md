@@ -1,4 +1,4 @@
-# Distributed AI: Local Multi-Agent LLM Ensemble on Proxmox
+# Distributed AI: Local Multi-Agent LLM Ensemble
 
 A publication-oriented, fully local distributed AI system for ensemble LLM inference, benchmarking, and statistical reporting.
 
