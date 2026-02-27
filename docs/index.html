@@ -23,6 +23,7 @@
     <div class="nav-inner">
       <div class="brand">Distributed AI Ensemble</div>
       <div class="nav-links">
+        <a href="#start">Start Here</a>
         <a href="#abstract">Abstract</a>
         <a href="#architecture">Architecture</a>
         <a href="#playground">Playground</a>
@@ -51,7 +52,7 @@
       <div class="hero-actions">
         <a class="btn btn-primary" href="#playground">Try AI Playground</a>
         <a class="btn btn-primary" href="interactive_dashboard.html">Open Interactive Dashboard</a>
-        <a class="btn" href="../paper/IEEE_Distributed_AI_Ensemble.pdf">Read PDF</a>
+        <a class="btn" href="assets/paper/IEEE_Distributed_AI_Ensemble.pdf">Read PDF</a>
         <a class="btn" href="https://github.com/ANIS151993/Distributed-AI">Project GitHub</a>
         <a class="btn" href="https://github.com/ANIS151993">GitHub Profile</a>
       </div>
@@ -59,6 +60,30 @@
   </header>
 
   <main>
+    <section class="section alt" id="start">
+      <div class="container">
+        <h2>Start Here</h2>
+        <p class="step-intro">Use this public portal in three simple steps.</p>
+        <div class="three-col">
+          <article class="step-card">
+            <span class="step-num">1</span>
+            <h3>Read the Architecture</h3>
+            <p>Open the interactive architecture map to understand query flow from orchestrator to agents.</p>
+          </article>
+          <article class="step-card">
+            <span class="step-num">2</span>
+            <h3>Try a Live Query</h3>
+            <p>Go to Playground, set your public orchestrator URL, and run one strategy with fixed seed.</p>
+          </article>
+          <article class="step-card">
+            <span class="step-num">3</span>
+            <h3>Check Results and Paper</h3>
+            <p>Review benchmark charts, CSV/JSON exports, and the full IEEE manuscript from this same site.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="abstract">
       <div class="container narrow">
         <h2>Abstract</h2>
@@ -165,12 +190,15 @@
         <h2>Live AI Playground</h2>
         <p>
           This playground calls your orchestrator <code>/query</code> API directly.
-          For public use, set a public HTTPS endpoint (for example, your tunnel URL) with CORS enabled.
+          For public use, set a public HTTPS endpoint (for example, your tunnel URL) with CORS enabled on the orchestrator.
         </p>
         <div class="playground-grid">
           <form id="playgroundForm" class="playground-card">
             <label for="apiEndpoint">Orchestrator API URL</label>
             <input id="apiEndpoint" name="apiEndpoint" type="url" placeholder="https://your-public-endpoint.example.com" />
+            <p class="input-help">
+              Example endpoint: <code>https://your-subdomain.example.com</code> (without trailing <code>/query</code>).
+            </p>
 
             <label for="strategy">Strategy</label>
             <select id="strategy" name="strategy">
@@ -219,7 +247,7 @@
         <div class="paper-frame-wrap">
           <iframe
             title="IEEE paper preview"
-            src="../paper/IEEE_Distributed_AI_Ensemble.pdf#view=FitH"
+            src="assets/paper/IEEE_Distributed_AI_Ensemble.pdf#view=FitH"
             loading="lazy">
           </iframe>
         </div>
@@ -268,15 +296,15 @@
         <div class="resource-grid">
           <a href="https://github.com/ANIS151993">GitHub Profile</a>
           <a href="https://github.com/ANIS151993/Distributed-AI">Project Repository</a>
-          <a href="../README.md">Project README</a>
+          <a href="https://github.com/ANIS151993/Distributed-AI/blob/main/README.md">Project README</a>
           <a href="interactive_dashboard.html">Interactive Dashboard</a>
           <a href="#playground">Live Playground</a>
-          <a href="../paper/IEEE_Distributed_AI_Ensemble.tex">IEEE Manuscript (LaTeX)</a>
-          <a href="../paper/IEEE_Distributed_AI_Ensemble.pdf">IEEE Manuscript (PDF)</a>
-          <a href="../paper/README.md">Paper Build Guide</a>
-          <a href="../artifacts/benchmark_runs/run_20260226_193331/overall_summary.csv">Overall Summary (CSV)</a>
-          <a href="../artifacts/benchmark_runs/run_20260226_193331/overall_summary.json">Overall Summary (JSON)</a>
-          <a href="../artifacts/benchmark_runs/run_20260226_193331/overall_significance.csv">Significance Table (CSV)</a>
+          <a href="https://github.com/ANIS151993/Distributed-AI/blob/main/paper/IEEE_Distributed_AI_Ensemble.tex">IEEE Manuscript (LaTeX)</a>
+          <a href="assets/paper/IEEE_Distributed_AI_Ensemble.pdf">IEEE Manuscript (PDF)</a>
+          <a href="https://github.com/ANIS151993/Distributed-AI/blob/main/paper/README.md">Paper Build Guide</a>
+          <a href="assets/results/overall_summary.csv">Overall Summary (CSV)</a>
+          <a href="assets/results/overall_summary.json">Overall Summary (JSON)</a>
+          <a href="assets/results/overall_significance.csv">Significance Table (CSV)</a>
         </div>
       </div>
     </section>

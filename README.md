@@ -235,6 +235,8 @@ Web UI files:
 - `docs/styles.css`
 - `docs/script.js`
 - `docs/assets/data/report_data.js` (embedded chart data)
+- `docs/assets/paper/IEEE_Distributed_AI_Ensemble.pdf` (public embedded paper)
+- `docs/assets/results/*.csv|*.json` (public downloadable benchmark outputs)
 
 Public portal features:
 - Interactive architecture map (click nodes + flow simulation)

@@ -126,6 +126,20 @@ function initPlayground() {
   const runBtn = document.getElementById("runQueryBtn");
   if (!form || !statusEl || !outputEl || !runBtn) return;
 
+  const params = new URLSearchParams(window.location.search);
+  const qsEndpoint = params.get("endpoint");
+  const savedEndpoint = localStorage.getItem("distributed_ai_endpoint");
+  const savedPrompt = localStorage.getItem("distributed_ai_prompt");
+
+  if (qsEndpoint && !form.apiEndpoint.value) {
+    form.apiEndpoint.value = qsEndpoint;
+  } else if (savedEndpoint && !form.apiEndpoint.value) {
+    form.apiEndpoint.value = savedEndpoint;
+  }
+  if (savedPrompt && !form.prompt.value.trim()) {
+    form.prompt.value = savedPrompt;
+  }
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -135,6 +149,9 @@ function initPlayground() {
       outputEl.textContent = "Example: https://your-public-endpoint.example.com";
       return;
     }
+
+    localStorage.setItem("distributed_ai_endpoint", endpoint);
+    localStorage.setItem("distributed_ai_prompt", form.prompt.value);
 
     const payload = {
       prompt: form.prompt.value,
