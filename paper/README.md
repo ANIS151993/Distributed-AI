@@ -6,6 +6,8 @@ This folder contains the full manuscript package for conference-style submission
 
 - `IEEE_Distributed_AI_Ensemble.tex` - Main IEEE manuscript source
 - `IEEE_Distributed_AI_Ensemble.pdf` - Compiled manuscript PDF
+- `IEEE_Distributed_AI_Ensemble.docx` - Word export of the manuscript
+- `IEEE_Distributed_AI_Ensemble.txt` - Plain-text export of the manuscript
 - `references.bib` - Bibliography entries
 - `figures/` - PNG charts embedded in the paper
 - `tables/` - Auto-generated LaTeX tables from benchmark outputs
@@ -24,6 +26,14 @@ pdflatex IEEE_Distributed_AI_Ensemble.tex
 Output file:
 
 - `paper/IEEE_Distributed_AI_Ensemble.pdf`
+
+Optional export formats:
+
+```bash
+cd paper
+pandoc IEEE_Distributed_AI_Ensemble.tex -s -o IEEE_Distributed_AI_Ensemble.docx
+pandoc IEEE_Distributed_AI_Ensemble.tex -t plain -o IEEE_Distributed_AI_Ensemble.txt
+```
 
 ## Regenerate Figures and Tables
 

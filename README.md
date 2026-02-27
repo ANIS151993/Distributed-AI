@@ -216,6 +216,10 @@ Outputs are generated as:
 - JSON
 - PNG plots
 - IEEE LaTeX tables
+- Manuscript source (`.tex`)
+- Manuscript PDF (`.pdf`)
+- Manuscript Word (`.docx`)
+- Manuscript text (`.txt`)
 
 Primary artifact folders:
 
@@ -230,6 +234,10 @@ Key files:
 - `paper/tables/aggregate_strategy_results.tex`
 - `paper/tables/per_benchmark_results.tex`
 - `paper/tables/significance_highlights.tex`
+- `paper/IEEE_Distributed_AI_Ensemble.tex`
+- `paper/IEEE_Distributed_AI_Ensemble.pdf`
+- `paper/IEEE_Distributed_AI_Ensemble.docx`
+- `paper/IEEE_Distributed_AI_Ensemble.txt`
 
 ---
 
