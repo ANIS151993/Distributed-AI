@@ -689,6 +689,7 @@ p {
   background: linear-gradient(135deg, #ffffff 0%, #f5faff 100%);
   box-shadow: var(--shadow);
   padding: 14px;
+  text-align: center;
 }
 
 .paper-preview-card h3 {
@@ -697,10 +698,15 @@ p {
 
 .paper-preview-frame {
   margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 760px;
   border: 1px solid #d6deed;
   border-radius: 12px;
   background: #f8fbff;
   padding: 12px;
+  position: relative;
+  overflow: hidden;
 }
 
 .paper-preview-frame img {
@@ -708,6 +714,25 @@ p {
   width: 100%;
   border-radius: 8px;
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+.paper-preview-frame::after {
+  content: "Preview Only";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  padding: 10px 24px;
+  border: 2px solid rgba(185, 28, 28, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  color: rgba(127, 29, 29, 0.28);
+  font-weight: 700;
+  font-size: clamp(1rem, 3vw, 2rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
 }
 
 .paper-protected-panel {
