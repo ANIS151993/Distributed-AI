@@ -127,38 +127,31 @@ function initPaperAccess() {
   const passwordInput = document.getElementById("paperAccessPassword");
   const statusEl = document.getElementById("paperAccessStatus");
   const protectedPanel = document.getElementById("paperProtectedPanel");
-  const paperFrame = document.getElementById("paperFrame");
   const ruleGithub = document.getElementById("paperRuleGithub");
   const ruleYoutube = document.getElementById("paperRuleYoutube");
   const rulePermission = document.getElementById("paperRulePermission");
-  const paperPdfLink = document.getElementById("paperPdfLink");
-  const paperDocxLink = document.getElementById("paperDocxLink");
-  const paperTxtLink = document.getElementById("paperTxtLink");
-  const paperTexLink = document.getElementById("paperTexLink");
+  const paperProtectedPackageLink = document.getElementById("paperProtectedPackageLink");
+  const paperProtectedInstructionsLink = document.getElementById("paperProtectedInstructionsLink");
 
-  if (!unlockPaperBtn || !lockPaperBtn || !passwordInput || !statusEl || !protectedPanel || !paperFrame) return;
+  if (!unlockPaperBtn || !lockPaperBtn || !passwordInput || !statusEl || !protectedPanel) return;
 
   const storageKey = "distributed_ai_paper_access";
   const expectedHash = "5b484d8b2799daf74779ce686501847d4a08b5e917c1e8395e1da7f7e73bce0d";
   const paperFiles = {
-    pdf: "assets/paper/IEEE_Distributed_AI_Ensemble.pdf",
-    docx: "assets/paper/IEEE_Distributed_AI_Ensemble.docx",
-    txt: "assets/paper/IEEE_Distributed_AI_Ensemble.txt",
-    tex: "assets/paper/IEEE_Distributed_AI_Ensemble.tex",
+    packageGpg: "assets/paper/IEEE_Distributed_AI_Ensemble_Protected.tar.gpg",
+    instructions: "assets/paper/PAPER_ACCESS_INSTRUCTIONS.txt",
   };
 
   function setHeroState(unlocked) {
     if (!heroPaperGateBtn) return;
-    heroPaperGateBtn.textContent = unlocked ? "Open Full Paper" : "Request Full Paper";
+    heroPaperGateBtn.textContent = unlocked ? "Open Protected Package" : "Request Protected Paper";
     heroPaperGateBtn.setAttribute("href", "#paper");
   }
 
   function setFileLinks(unlocked) {
     const mappings = [
-      [paperPdfLink, paperFiles.pdf],
-      [paperDocxLink, paperFiles.docx],
-      [paperTxtLink, paperFiles.txt],
-      [paperTexLink, paperFiles.tex],
+      [paperProtectedPackageLink, paperFiles.packageGpg],
+      [paperProtectedInstructionsLink, paperFiles.instructions],
     ];
 
     mappings.forEach(([el, href]) => {
@@ -181,11 +174,9 @@ function initPaperAccess() {
     setFileLinks(unlocked);
 
     if (unlocked) {
-      paperFrame.setAttribute("src", `${paperFiles.pdf}#view=FitH`);
-      statusEl.textContent = "Access granted for this browser session. You can now read and download the full paper.";
+      statusEl.textContent = "Access granted for this browser session. You can now download the encrypted paper package and decryption guide.";
     } else {
-      paperFrame.removeAttribute("src");
-      statusEl.textContent = "Complete all three steps, then enter the approved password to read or download the full manuscript.";
+      statusEl.textContent = "Complete all three steps, then enter the approved password to unlock the protected paper package.";
     }
   }
 
@@ -213,7 +204,7 @@ function initPaperAccess() {
   if (heroPaperGateBtn) {
     heroPaperGateBtn.addEventListener("click", () => {
       if (sessionStorage.getItem(storageKey) === "granted") {
-        statusEl.textContent = "Access granted for this browser session. Scroll down to read the full paper.";
+        statusEl.textContent = "Access granted for this browser session. Scroll down to download the protected package.";
       } else {
         statusEl.textContent = "Follow GitHub, subscribe on YouTube, send your permission request, then enter the approved password.";
       }
@@ -222,7 +213,7 @@ function initPaperAccess() {
 
   unlockPaperBtn.addEventListener("click", async () => {
     if (!allRequirementsChecked()) {
-      statusEl.textContent = "Please complete and confirm all three required steps before unlocking the paper.";
+      statusEl.textContent = "Please complete and confirm all three required steps before unlocking the protected package.";
       return;
     }
 

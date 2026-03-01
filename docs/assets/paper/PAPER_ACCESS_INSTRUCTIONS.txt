@@ -1,0 +1,20 @@
+Protected paper access instructions
+
+This repository distributes the research paper only as an encrypted package.
+
+Package file:
+- IEEE_Distributed_AI_Ensemble_Protected.tar.gpg
+
+How to open it:
+1. Download the .tar.gpg file.
+2. Run:
+   gpg --decrypt --output IEEE_Distributed_AI_Ensemble_Protected.tar IEEE_Distributed_AI_Ensemble_Protected.tar.gpg
+3. Enter the approved password when prompted.
+4. Extract the tar file:
+   tar -xf IEEE_Distributed_AI_Ensemble_Protected.tar
+
+The extracted package contains:
+- IEEE_Distributed_AI_Ensemble.pdf
+- IEEE_Distributed_AI_Ensemble.docx
+- IEEE_Distributed_AI_Ensemble.tex
+- IEEE_Distributed_AI_Ensemble.txt

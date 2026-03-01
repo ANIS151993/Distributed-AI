@@ -56,7 +56,7 @@
       <div class="hero-actions">
         <a class="btn btn-primary" href="#playground">Try AI Playground</a>
         <a class="btn btn-primary" href="interactive_dashboard.html">Open Interactive Dashboard</a>
-        <a class="btn" href="#paper" id="heroPaperGateBtn">Request Full Paper</a>
+        <a class="btn" href="#paper" id="heroPaperGateBtn">Request Protected Paper</a>
         <a class="btn" href="https://github.com/ANIS151993/Distributed-AI">Project GitHub</a>
         <a class="btn" href="https://github.com/ANIS151993">GitHub Profile</a>
       </div>
@@ -388,13 +388,13 @@
               <strong>Restricted Access Policy</strong>
               <p class="muted">
                 Visitors must follow my GitHub, subscribe to my YouTube channel, send a permission request,
-                and then enter the approved access password to open the full paper or download files.
+                and then enter the approved access password to download the protected paper package.
               </p>
             </div>
           </div>
 
           <div class="playground-card">
-            <h3>Unlock Full Paper</h3>
+            <h3>Unlock Protected Package</h3>
             <div class="paper-step-links">
               <a class="btn" href="https://github.com/ANIS151993" target="_blank" rel="noreferrer">1. Follow GitHub</a>
               <a class="btn" href="https://youtu.be/Zybs0Omg600" target="_blank" rel="noreferrer">2. Subscribe YouTube</a>
@@ -435,7 +435,7 @@
             </div>
 
             <p id="paperAccessStatus" class="muted">
-              Complete all three steps, then enter the approved password to read or download the full manuscript.
+              Complete all three steps, then enter the approved password to unlock the protected paper package.
             </p>
             <p class="muted">
               Access is stored only for this browser session.
@@ -445,17 +445,16 @@
 
         <div class="paper-protected-panel" id="paperProtectedPanel" hidden>
           <div class="paper-downloads">
-            <a class="btn btn-primary" id="paperPdfLink" href="#paper">Read PDF</a>
-            <a class="btn" id="paperDocxLink" href="#paper">Download Word</a>
-            <a class="btn" id="paperTxtLink" href="#paper">Download Text</a>
-            <a class="btn" id="paperTexLink" href="#paper">Download LaTeX</a>
+            <a class="btn btn-primary" id="paperProtectedPackageLink" href="#paper">Download Protected Package</a>
+            <a class="btn" id="paperProtectedInstructionsLink" href="#paper">Open Decryption Guide</a>
           </div>
-          <div class="paper-frame-wrap">
-            <iframe
-              id="paperFrame"
-              title="IEEE paper preview"
-              loading="lazy">
-            </iframe>
+          <div class="paper-gate-note">
+            <strong>Protected File Delivery</strong>
+            <p class="muted">
+              The full manuscript is no longer published as plain PDF, Word, LaTeX, or text files in this public branch.
+              It is distributed only as an encrypted <code>.tar.gpg</code> package. After download, use the approved
+              password to decrypt and extract the files locally.
+            </p>
           </div>
         </div>
       </div>
@@ -507,7 +506,7 @@
           <a href="https://github.com/ANIS151993/Distributed-AI/blob/main/README.md">Project README</a>
           <a href="interactive_dashboard.html">Interactive Dashboard</a>
           <a href="#playground">Live Playground</a>
-          <a href="#paper">Request Full Paper Access</a>
+          <a href="#paper">Request Protected Paper Access</a>
           <a href="https://github.com/ANIS151993/Distributed-AI/blob/main/paper/README.md">Paper Build Guide</a>
           <a href="assets/results/overall_summary.csv">Overall Summary (CSV)</a>
           <a href="assets/results/overall_summary.json">Overall Summary (JSON)</a>
@@ -526,6 +525,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260301-01"></script>
+  <script src="script.js?v=20260301-02"></script>
 </body>
 </html>

@@ -216,10 +216,8 @@ Outputs are generated as:
 - JSON
 - PNG plots
 - IEEE LaTeX tables
-- Manuscript source (`.tex`)
-- Manuscript PDF (`.pdf`)
-- Manuscript Word (`.docx`)
-- Manuscript text (`.txt`)
+- Protected manuscript package (`.tar.gpg`)
+- Decryption guide (`.txt`)
 
 Primary artifact folders:
 
@@ -234,10 +232,8 @@ Key files:
 - `paper/tables/aggregate_strategy_results.tex`
 - `paper/tables/per_benchmark_results.tex`
 - `paper/tables/significance_highlights.tex`
-- `paper/IEEE_Distributed_AI_Ensemble.tex`
-- `paper/IEEE_Distributed_AI_Ensemble.pdf`
-- `paper/IEEE_Distributed_AI_Ensemble.docx`
-- `paper/IEEE_Distributed_AI_Ensemble.txt`
+- `paper/IEEE_Distributed_AI_Ensemble_Protected.tar.gpg`
+- `paper/PAPER_ACCESS_INSTRUCTIONS.txt`
 
 ---
 
@@ -266,7 +262,8 @@ Web UI files:
 - `docs/styles.css`
 - `docs/script.js`
 - `docs/assets/data/report_data.js` (embedded chart data)
-- `docs/assets/paper/IEEE_Distributed_AI_Ensemble.pdf` (public embedded paper)
+- `docs/assets/paper/IEEE_Distributed_AI_Ensemble_Protected.tar.gpg` (encrypted paper package)
+- `docs/assets/paper/PAPER_ACCESS_INSTRUCTIONS.txt` (public decryption guide)
 - `docs/assets/results/*.csv|*.json` (public downloadable benchmark outputs)
 
 Public portal features:
@@ -275,7 +272,7 @@ Public portal features:
 - Live AI playground (`/query` API caller with strategy controls)
 - Individual model selection (choose any subset of agents per query)
 - Per-query visual analytics (per-model latency/tokens and answer distribution charts)
-- Embedded IEEE paper reader
+- Password-gated protected paper package access
 - Direct links to project repository and GitHub profile
 
 Enable on GitHub:
@@ -436,8 +433,8 @@ Distributed-AI/
 │   └── optimization_runs/
 ├── docs/
 ├── paper/
-│   ├── IEEE_Distributed_AI_Ensemble.tex
-│   ├── IEEE_Distributed_AI_Ensemble.pdf
+│   ├── IEEE_Distributed_AI_Ensemble_Protected.tar.gpg
+│   ├── PAPER_ACCESS_INSTRUCTIONS.txt
 │   ├── references.bib
 │   ├── figures/
 │   ├── tables/

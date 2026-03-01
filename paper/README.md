@@ -1,38 +1,34 @@
-# IEEE / Overleaf Paper Package
+# Protected Paper Package
 
-This folder contains the full manuscript package for conference-style submission.
+This folder contains the supporting manuscript assets and the encrypted public distribution package.
 
 ## Contents
 
-- `IEEE_Distributed_AI_Ensemble.tex` - Main IEEE manuscript source
-- `IEEE_Distributed_AI_Ensemble.pdf` - Compiled manuscript PDF
-- `IEEE_Distributed_AI_Ensemble.docx` - Word export of the manuscript
-- `IEEE_Distributed_AI_Ensemble.txt` - Plain-text export of the manuscript
+- `IEEE_Distributed_AI_Ensemble_Protected.tar.gpg` - AES-encrypted manuscript package
+- `PAPER_ACCESS_INSTRUCTIONS.txt` - Decryption guide for authorized readers
 - `references.bib` - Bibliography entries
 - `figures/` - PNG charts embedded in the paper
 - `tables/` - Auto-generated LaTeX tables from benchmark outputs
-- `overleaf/` - Upload-ready Overleaf package
+- `overleaf/` - Supporting Overleaf assets plus the encrypted manuscript package
 
-## Build Locally
+## Public Distribution Policy
 
-```bash
-cd paper
-pdflatex IEEE_Distributed_AI_Ensemble.tex
-bibtex IEEE_Distributed_AI_Ensemble
-pdflatex IEEE_Distributed_AI_Ensemble.tex
-pdflatex IEEE_Distributed_AI_Ensemble.tex
-```
+The public branch does not ship the manuscript as plain `.pdf`, `.docx`, `.tex`, or `.txt` files.
+Only the encrypted package is distributed here.
 
-Output file:
+Authorized readers must:
 
-- `paper/IEEE_Distributed_AI_Ensemble.pdf`
+1. Download `IEEE_Distributed_AI_Ensemble_Protected.tar.gpg`
+2. Follow the steps in `PAPER_ACCESS_INSTRUCTIONS.txt`
+3. Enter the approved password to decrypt and extract the package
 
-Optional export formats:
+## Open the Protected Package
 
 ```bash
 cd paper
-pandoc IEEE_Distributed_AI_Ensemble.tex -s -o IEEE_Distributed_AI_Ensemble.docx
-pandoc IEEE_Distributed_AI_Ensemble.tex -t plain -o IEEE_Distributed_AI_Ensemble.txt
+gpg --decrypt --output IEEE_Distributed_AI_Ensemble_Protected.tar \
+  IEEE_Distributed_AI_Ensemble_Protected.tar.gpg
+tar -xf IEEE_Distributed_AI_Ensemble_Protected.tar
 ```
 
 ## Regenerate Figures and Tables
@@ -41,6 +37,11 @@ pandoc IEEE_Distributed_AI_Ensemble.tex -t plain -o IEEE_Distributed_AI_Ensemble
 cd /root/Distributed-AI
 /root/distributed_ai/.venv/bin/python scripts/generate_visual_assets.py
 ```
+
+## Private Editing Note
+
+If you need to edit or rebuild the manuscript, use your private local backup of the plain source files.
+Those editable manuscript files are intentionally excluded from the public branch.
 
 ## Data Provenance
 

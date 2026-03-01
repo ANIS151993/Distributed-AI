@@ -1,20 +1,19 @@
-# Overleaf Upload Package
+# Overleaf Support Package
 
-This folder is upload-ready for Overleaf.
+This folder now contains the supporting Overleaf assets plus the encrypted manuscript package.
 
 ## Included
 
-- `IEEE_Distributed_AI_Ensemble.tex`
+- `IEEE_Distributed_AI_Ensemble_Protected.tar.gpg`
+- `PAPER_ACCESS_INSTRUCTIONS.txt`
 - `references.bib`
 - `figures/` (all PNG assets used in the paper)
 - `tables/` (all LaTeX tables generated from benchmark artifacts)
 
-## Overleaf Steps
+## Public Access Note
 
-1. Create a new Overleaf project.
-2. Upload all files and folders from this directory.
-3. Set main file to `IEEE_Distributed_AI_Ensemble.tex`.
-4. Compile with PDFLaTeX + BibTeX.
+The plain manuscript files are intentionally not published in this public branch.
+Authorized users must decrypt the protected package first, then upload the extracted files to Overleaf privately.
 
 ## Notes
 
