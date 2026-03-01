@@ -717,7 +717,10 @@ p {
 }
 
 .paper-preview-frame::after {
-  content: "Md Anisur Rahman Chowdhury";
+  content: none;
+}
+
+.paper-preview-watermark {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -728,11 +731,14 @@ p {
   background: rgba(255, 255, 255, 0.45);
   color: rgba(127, 29, 29, 0.28);
   font-weight: 700;
-  font-size: clamp(1rem, 3vw, 2rem);
-  letter-spacing: 0.12em;
+  font-size: clamp(0.95rem, 2.5vw, 1.8rem);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   pointer-events: none;
   backdrop-filter: blur(2px);
+  white-space: nowrap;
+  text-align: center;
+  z-index: 2;
 }
 
 .paper-protected-panel {
