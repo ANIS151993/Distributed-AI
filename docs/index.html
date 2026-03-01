@@ -56,7 +56,7 @@
       <div class="hero-actions">
         <a class="btn btn-primary" href="#playground">Try AI Playground</a>
         <a class="btn btn-primary" href="interactive_dashboard.html">Open Interactive Dashboard</a>
-        <a class="btn" href="assets/paper/IEEE_Distributed_AI_Ensemble.pdf">Read PDF</a>
+        <a class="btn" href="#paper" id="heroPaperGateBtn">Request Full Paper</a>
         <a class="btn" href="https://github.com/ANIS151993/Distributed-AI">Project GitHub</a>
         <a class="btn" href="https://github.com/ANIS151993">GitHub Profile</a>
       </div>
@@ -367,16 +367,96 @@
 
     <section class="section alt" id="paper">
       <div class="container">
-        <h2>Read the Full Paper</h2>
+        <h2>Paper Access</h2>
         <p>
-          You can read the IEEE manuscript directly here, or open source/PDF files from the links below.
+          Only the public abstract is shown by default. Full manuscript reading and downloads are restricted behind
+          your follow, subscribe, permission-request, and password gate.
         </p>
-        <div class="paper-frame-wrap">
-          <iframe
-            title="IEEE paper preview"
-            src="assets/paper/IEEE_Distributed_AI_Ensemble.pdf#view=FitH"
-            loading="lazy">
-          </iframe>
+        <div class="paper-access-grid">
+          <div class="playground-card">
+            <h3>Public Abstract</h3>
+            <p>
+              This project presents a complete local distributed AI network in which one FastAPI orchestrator
+              routes prompts to four local Ollama-based LLM agents, aggregates answers with multiple ensemble
+              strategies, and logs benchmark-ready metrics. The system implements majority voting, dynamic weighted
+              voting, inverse surprising popularity, topic-based routing, and two-round debate. Evaluation is
+              automated over MMLU, GSM8K, and TruthfulQA with deterministic controls, repeated trials, confidence
+              intervals, paired t-tests, and Wilcoxon signed-rank tests. All outputs are exported as CSV, JSON,
+              PNG figures, and IEEE LaTeX tables, with an accompanying manuscript package for conference submission.
+            </p>
+            <div class="paper-gate-note">
+              <strong>Restricted Access Policy</strong>
+              <p class="muted">
+                Visitors must follow your GitHub, subscribe to your YouTube channel, send a permission request,
+                and then enter the approved access password to open the full paper or download files.
+              </p>
+            </div>
+          </div>
+
+          <div class="playground-card">
+            <h3>Unlock Full Paper</h3>
+            <div class="paper-step-links">
+              <a class="btn" href="https://github.com/ANIS151993" target="_blank" rel="noreferrer">1. Follow GitHub</a>
+              <a class="btn" href="https://youtu.be/Zybs0Omg600" target="_blank" rel="noreferrer">2. Subscribe YouTube</a>
+              <a
+                class="btn"
+                href="mailto:engr.aanis@gmail.com?subject=Paper%20Access%20Request&body=Hello%2C%20I%20would%20like%20permission%20to%20read%20and%20download%20the%20full%20paper."
+              >
+                3. Send Permission Request
+              </a>
+            </div>
+
+            <div class="paper-checklist">
+              <label class="checkbox-row">
+                <input type="checkbox" id="paperRuleGithub" />
+                I followed the GitHub account.
+              </label>
+              <label class="checkbox-row">
+                <input type="checkbox" id="paperRuleYoutube" />
+                I subscribed to the YouTube channel.
+              </label>
+              <label class="checkbox-row">
+                <input type="checkbox" id="paperRulePermission" />
+                I sent the permission request.
+              </label>
+            </div>
+
+            <label for="paperAccessPassword">Access Password</label>
+            <input
+              id="paperAccessPassword"
+              type="password"
+              placeholder="Enter the approved paper access password"
+              autocomplete="off"
+            />
+
+            <div class="paper-access-actions">
+              <button class="btn btn-primary" type="button" id="unlockPaperBtn">Unlock Paper</button>
+              <button class="btn" type="button" id="lockPaperBtn">Lock Again</button>
+            </div>
+
+            <p id="paperAccessStatus" class="muted">
+              Complete all three steps, then enter the approved password to read or download the full manuscript.
+            </p>
+            <p class="muted">
+              Access is stored only for this browser session.
+            </p>
+          </div>
+        </div>
+
+        <div class="paper-protected-panel" id="paperProtectedPanel" hidden>
+          <div class="paper-downloads">
+            <a class="btn btn-primary" id="paperPdfLink" href="#paper">Read PDF</a>
+            <a class="btn" id="paperDocxLink" href="#paper">Download Word</a>
+            <a class="btn" id="paperTxtLink" href="#paper">Download Text</a>
+            <a class="btn" id="paperTexLink" href="#paper">Download LaTeX</a>
+          </div>
+          <div class="paper-frame-wrap">
+            <iframe
+              id="paperFrame"
+              title="IEEE paper preview"
+              loading="lazy">
+            </iframe>
+          </div>
         </div>
       </div>
     </section>
@@ -427,10 +507,7 @@
           <a href="https://github.com/ANIS151993/Distributed-AI/blob/main/README.md">Project README</a>
           <a href="interactive_dashboard.html">Interactive Dashboard</a>
           <a href="#playground">Live Playground</a>
-          <a href="https://github.com/ANIS151993/Distributed-AI/blob/main/paper/IEEE_Distributed_AI_Ensemble.tex">IEEE Manuscript (LaTeX)</a>
-          <a href="assets/paper/IEEE_Distributed_AI_Ensemble.pdf">IEEE Manuscript (PDF)</a>
-          <a href="assets/paper/IEEE_Distributed_AI_Ensemble.docx">IEEE Manuscript (Word)</a>
-          <a href="assets/paper/IEEE_Distributed_AI_Ensemble.txt">IEEE Manuscript (Text)</a>
+          <a href="#paper">Request Full Paper Access</a>
           <a href="https://github.com/ANIS151993/Distributed-AI/blob/main/paper/README.md">Paper Build Guide</a>
           <a href="assets/results/overall_summary.csv">Overall Summary (CSV)</a>
           <a href="assets/results/overall_summary.json">Overall Summary (JSON)</a>
@@ -449,6 +526,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260227-03"></script>
+  <script src="script.js?v=20260301-01"></script>
 </body>
 </html>

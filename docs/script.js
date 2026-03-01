@@ -1,6 +1,7 @@
 (function () {
   initMetrics();
   initArchitecture();
+  initPaperAccess();
   initPlayground();
 })();
 
@@ -117,6 +118,154 @@ function initArchitecture() {
       }
     });
   }
+}
+
+function initPaperAccess() {
+  const heroPaperGateBtn = document.getElementById("heroPaperGateBtn");
+  const unlockPaperBtn = document.getElementById("unlockPaperBtn");
+  const lockPaperBtn = document.getElementById("lockPaperBtn");
+  const passwordInput = document.getElementById("paperAccessPassword");
+  const statusEl = document.getElementById("paperAccessStatus");
+  const protectedPanel = document.getElementById("paperProtectedPanel");
+  const paperFrame = document.getElementById("paperFrame");
+  const ruleGithub = document.getElementById("paperRuleGithub");
+  const ruleYoutube = document.getElementById("paperRuleYoutube");
+  const rulePermission = document.getElementById("paperRulePermission");
+  const paperPdfLink = document.getElementById("paperPdfLink");
+  const paperDocxLink = document.getElementById("paperDocxLink");
+  const paperTxtLink = document.getElementById("paperTxtLink");
+  const paperTexLink = document.getElementById("paperTexLink");
+
+  if (!unlockPaperBtn || !lockPaperBtn || !passwordInput || !statusEl || !protectedPanel || !paperFrame) return;
+
+  const storageKey = "distributed_ai_paper_access";
+  const expectedHash = "5b484d8b2799daf74779ce686501847d4a08b5e917c1e8395e1da7f7e73bce0d";
+  const paperFiles = {
+    pdf: "assets/paper/IEEE_Distributed_AI_Ensemble.pdf",
+    docx: "assets/paper/IEEE_Distributed_AI_Ensemble.docx",
+    txt: "assets/paper/IEEE_Distributed_AI_Ensemble.txt",
+    tex: "assets/paper/IEEE_Distributed_AI_Ensemble.tex",
+  };
+
+  function setHeroState(unlocked) {
+    if (!heroPaperGateBtn) return;
+    heroPaperGateBtn.textContent = unlocked ? "Open Full Paper" : "Request Full Paper";
+    heroPaperGateBtn.setAttribute("href", "#paper");
+  }
+
+  function setFileLinks(unlocked) {
+    const mappings = [
+      [paperPdfLink, paperFiles.pdf],
+      [paperDocxLink, paperFiles.docx],
+      [paperTxtLink, paperFiles.txt],
+      [paperTexLink, paperFiles.tex],
+    ];
+
+    mappings.forEach(([el, href]) => {
+      if (!el) return;
+      if (unlocked) {
+        el.setAttribute("href", href);
+        el.setAttribute("target", "_blank");
+        el.setAttribute("rel", "noreferrer");
+      } else {
+        el.setAttribute("href", "#paper");
+        el.removeAttribute("target");
+        el.removeAttribute("rel");
+      }
+    });
+  }
+
+  function applyAccessState(unlocked) {
+    protectedPanel.hidden = !unlocked;
+    setHeroState(unlocked);
+    setFileLinks(unlocked);
+
+    if (unlocked) {
+      paperFrame.setAttribute("src", `${paperFiles.pdf}#view=FitH`);
+      statusEl.textContent = "Access granted for this browser session. You can now read and download the full paper.";
+    } else {
+      paperFrame.removeAttribute("src");
+      statusEl.textContent = "Complete all three steps, then enter the approved password to read or download the full manuscript.";
+    }
+  }
+
+  function allRequirementsChecked() {
+    return [ruleGithub, ruleYoutube, rulePermission].every((el) => el && el.checked);
+  }
+
+  async function sha256(text) {
+    if (!window.crypto || !window.crypto.subtle) {
+      throw new Error("This browser does not support secure password verification.");
+    }
+
+    const buffer = await window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buffer))
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+  }
+
+  if (sessionStorage.getItem(storageKey) === "granted") {
+    applyAccessState(true);
+  } else {
+    applyAccessState(false);
+  }
+
+  if (heroPaperGateBtn) {
+    heroPaperGateBtn.addEventListener("click", () => {
+      if (sessionStorage.getItem(storageKey) === "granted") {
+        statusEl.textContent = "Access granted for this browser session. Scroll down to read the full paper.";
+      } else {
+        statusEl.textContent = "Follow GitHub, subscribe on YouTube, send your permission request, then enter the approved password.";
+      }
+    });
+  }
+
+  unlockPaperBtn.addEventListener("click", async () => {
+    if (!allRequirementsChecked()) {
+      statusEl.textContent = "Please complete and confirm all three required steps before unlocking the paper.";
+      return;
+    }
+
+    const attempt = passwordInput.value;
+    if (!attempt) {
+      statusEl.textContent = "Enter the approved paper access password.";
+      return;
+    }
+
+    unlockPaperBtn.disabled = true;
+    statusEl.textContent = "Verifying access password...";
+
+    try {
+      const digest = await sha256(attempt);
+      if (digest !== expectedHash) {
+        statusEl.textContent = "Access denied. The password is incorrect.";
+        passwordInput.value = "";
+        applyAccessState(false);
+        sessionStorage.removeItem(storageKey);
+        return;
+      }
+
+      sessionStorage.setItem(storageKey, "granted");
+      applyAccessState(true);
+    } catch (error) {
+      statusEl.textContent = error instanceof Error ? error.message : "Unable to verify access password.";
+    } finally {
+      unlockPaperBtn.disabled = false;
+    }
+  });
+
+  lockPaperBtn.addEventListener("click", () => {
+    sessionStorage.removeItem(storageKey);
+    passwordInput.value = "";
+    applyAccessState(false);
+  });
+
+  passwordInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      unlockPaperBtn.click();
+    }
+  });
 }
 
 function initPlayground() {
