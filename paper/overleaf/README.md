@@ -1,19 +1,20 @@
 # Overleaf Support Package
 
-This folder now contains the supporting Overleaf assets plus the encrypted manuscript package.
+This folder mirrors the manuscript files for direct upload to Overleaf.
 
 ## Included
 
-- `IEEE_Distributed_AI_Ensemble_Protected.tar.gpg`
-- `PAPER_ACCESS_INSTRUCTIONS.txt`
+- `IEEE_Distributed_AI_Ensemble.pdf`
+- `IEEE_Distributed_AI_Ensemble.docx`
+- `IEEE_Distributed_AI_Ensemble.tex`
+- `IEEE_Distributed_AI_Ensemble.txt`
 - `references.bib`
 - `figures/` (all PNG assets used in the paper)
 - `tables/` (all LaTeX tables generated from benchmark artifacts)
 
 ## Public Access Note
 
-The plain manuscript files are intentionally not published in this public branch.
-Authorized users must decrypt the protected package first, then upload the extracted files to Overleaf privately.
+These manuscript files are published openly in this repository, with no access gate or encryption.
 
 ## Notes
 

@@ -1,0 +1,499 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{balance}
+\usepackage{listings}
+\usepackage[final]{microtype}
+\usepackage[skip=3pt,font=footnotesize]{caption}
+\usepackage{enumitem}
+\usepackage[compact]{titlesec}
+\setlist{noitemsep, topsep=2pt, parsep=0pt, partopsep=0pt}
+\setlength{\textfloatsep}{5pt plus 1pt minus 2pt}
+\setlength{\floatsep}{4pt plus 1pt minus 1pt}
+\setlength{\intextsep}{5pt plus 1pt minus 1pt}
+\titlespacing*{\section}{0pt}{4pt}{2pt}
+\titlespacing*{\subsection}{0pt}{3pt}{1pt}
+\setlength{\abovedisplayskip}{3pt plus 1pt minus 1pt}
+\setlength{\belowdisplayskip}{3pt plus 1pt minus 1pt}
+\setlength{\abovedisplayshortskip}{2pt plus 1pt minus 1pt}
+\setlength{\belowdisplayshortskip}{2pt plus 1pt minus 1pt}
+\renewcommand{\baselinestretch}{0.97}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  frame=single,
+  aboveskip=3pt,
+  belowskip=3pt
+}
+
+\title{A Local Distributed Multi-Agent LLM Ensemble System:\\
+Design, Optimization, Reproducibility, and Statistical Evaluation}
+
+\author{
+\IEEEauthorblockN{Md Anisur Rahman Chowdhury\textsuperscript{1*}, Kefei Wang\textsuperscript{2}}
+\IEEEauthorblockA{\textsuperscript{1}Dept. of Computer and Information Science, Gannon University, USA}
+\IEEEauthorblockA{\textsuperscript{2}Utah Valley University, USA}
+\IEEEauthorblockA{Emails: engr.aanis@gmail.com, kefei.wang@uvu.edu}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This study presents a fully local distributed inference system built around multiple language-model agents and a central orchestrator. The full pipeline is implemented for repeatable experimentation: request dispatch, multi-strategy aggregation, benchmark execution, significance testing, and publication artifact generation are all automated. The deployment uses one FastAPI orchestrator and four Ollama-backed agent nodes on a private local network. Each agent returns not only text output, but also timing and token metadata, enabling fair system-level comparison between strategies.
+
+Five aggregation strategies are implemented under a single interface: majority voting, dynamic weighted voting, inverse surprising popularity, topic-based routing, and a two-round debate protocol. Evaluation is run on MMLU, GSM8K, and TruthfulQA with repeated trials, fixed seeds, and deterministic controls. Results are exported in CSV, JSON, PNG, and LaTeX table formats and then compiled into an IEEE manuscript package and web-facing public report. The measured outcomes show that weighted and inverse surprising popularity strategies produce the strongest average accuracy while preserving practical response time, whereas debate improves interpretability at a large latency cost. The final contribution is an end-to-end, reproducible engineering workflow that supports both systems research and publication delivery.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Distributed Systems, LLM Ensemble, Multi-Agent Inference, Local Deployment, Reproducible Benchmarking, Statistical Testing
+\end{IEEEkeywords}
+
+\section{Introduction}
+Modern language-model systems are often evaluated as single-model endpoints, even when deployment environments can host several specialized models at once. In practice, many teams now run local model stacks for privacy, cost control, and predictable operation. This creates a direct systems question: how should a local orchestrator combine multiple model outputs so that quality improves without making runtime impractical?
+
+This paper answers that question through a working distributed implementation and a full benchmark pipeline. The system was not designed as a toy prototype; it was built to support day-to-day experimentation and manuscript-ready reporting. One node receives user requests, forwards prompts to multiple agent nodes, applies a selected aggregation strategy, and logs full metadata for every run. The same framework then drives repeated benchmark execution and significance analysis.
+
+Three goals guided the work:
+\begin{enumerate}
+  \item \textbf{Engineering reliability}: make multi-node orchestration stable under CPU-constrained and mixed-hardware environments.
+  \item \textbf{Method comparison}: evaluate multiple aggregation strategies under identical controls.
+  \item \textbf{Publication readiness}: produce reproducible outputs that can be inserted into a conference manuscript without manual reconstruction.
+\end{enumerate}
+
+The design and evaluation choices are influenced by prior work on self-consistency~\cite{wang2022selfconsistency}, crowd aggregation~\cite{surowiecki2005wisdom}, and surprising popularity~\cite{prelec2017surprisingly}, but adapted to a local distributed serving context.
+
+\section{Related Literature and Positioning}
+\subsection{Consistency-Based Aggregation}
+Self-consistency methods show that sampling diversity can improve reasoning quality when outputs are consolidated carefully~\cite{wang2022selfconsistency}. Most prior formulations evaluate repeated samples from one model. The present work differs in two ways: first, diversity comes from distinct model endpoints rather than repeated sampling from the same endpoint; second, strategy comparison includes system-level costs such as end-to-end latency and operational variance. This distinction matters in local deployment, where both compute and memory are finite and every additional model call carries visible runtime overhead.
+
+\subsection{Crowd Aggregation Signals}
+The crowd-wisdom perspective~\cite{surowiecki2005wisdom} motivates majority and weighted voting under heterogeneous participants. The surprising popularity line~\cite{prelec2017surprisingly} adds second-order signals by asking how respondents expect others to answer. Translating that concept to model ensembles gives a practical mechanism for identifying underrepresented but plausible answers. In this paper, that mechanism appears as inverse surprising popularity, where observed vote mass and predicted-majority mass are combined in a single score.
+
+\subsection{Local Serving Frameworks}
+Practical local serving now relies on lightweight model runtimes and HTTP-based orchestration. Ollama~\cite{ollama} simplifies model packaging and endpoint management, while FastAPI~\cite{fastapi} provides a compact asynchronous service layer. The novelty in this study is not a new serving framework, but the way these tools are combined into a full reproducible research workflow: one endpoint for strategy-controlled inference, one benchmark runner for repeated trials, and one artifact pipeline for paper-ready outputs.
+
+\subsection{Gap Addressed by This Work}
+Many reports focus on benchmark scores but provide incomplete deployment details, making independent reproduction difficult. Other reports provide architecture sketches but limited statistical evidence. This work explicitly targets both sides at once: deployment realism and statistical rigor. The result is a tightly coupled engineering and evaluation pipeline where each reported number can be traced to a stored run artifact.
+
+\section{Deployment Context and Architecture}
+\subsection{Infrastructure Summary}
+The cluster runs on Ubuntu 24.04 virtual machines~\cite{ubuntu2404} in a private subnet. The deployed node layout used in this study is:
+\begin{itemize}
+  \item orchestrator: \texttt{172.16.185.223}
+  \item agent-1: \texttt{172.16.185.209} (\texttt{llama3.2:3b})
+  \item agent-2: \texttt{172.16.185.218} (\texttt{qwen2.5:3b})
+  \item agent-3: \texttt{172.16.185.220} (\texttt{phi3:mini})
+  \item agent-4: \texttt{172.16.185.222} (\texttt{gemma2:2b})
+\end{itemize}
+
+The orchestrator is implemented in FastAPI~\cite{fastapi}. Each agent uses Ollama~\cite{ollama} and exposes a REST endpoint on port 11434.
+
+\subsection{Request Flow}
+The request lifecycle is intentionally simple.
+\begin{enumerate}
+  \item The orchestrator receives a prompt and runtime controls.
+  \item It sends asynchronous requests to selected agents.
+  \item It normalizes responses and computes per-agent metadata.
+  \item It applies the chosen aggregation strategy.
+  \item It returns the final answer plus full intermediate records.
+\end{enumerate}
+
+\begin{figure}[t]
+  \centering
+  \fbox{
+    \begin{minipage}{0.92\columnwidth}
+      \ttfamily\scriptsize
+      User Query\\
+      \hspace*{1em}$\downarrow$\\
+      Orchestrator (FastAPI)\\
+      \hspace*{1em}$\downarrow$ asynchronous fan-out\\
+      Agent-1, Agent-2, Agent-3, Agent-4 (Ollama)\\
+      \hspace*{1em}$\downarrow$\\
+      Aggregation + Metrics + Statistical Analysis\\
+      \hspace*{1em}$\downarrow$\\
+      Final Response + CSV/JSON/PNG/LaTeX exports
+    \end{minipage}
+  }
+  \caption{Operational request flow from query intake to artifact export.}
+  \label{fig:flow}
+\end{figure}
+
+\subsection{Service Endpoints}
+The orchestrator API surface uses three endpoints:
+\begin{itemize}
+  \item \texttt{GET /health}: liveness and readiness check.
+  \item \texttt{GET /agents}: active agent list and endpoint health.
+  \item \texttt{POST /query}: strategy-controlled ensemble inference.
+\end{itemize}
+
+\section{Implementation Details}
+\subsection{Orchestrator Internals}
+The orchestrator is structured into small modules with clear ownership boundaries: request parsing, asynchronous dispatch, response normalization, aggregation, metric logging, and artifact export. This decomposition reduced failure propagation during debugging because each stage could be validated independently. The request parser enforces defaults for seed, deterministic mode, temperature, and maximum tokens, ensuring that benchmark runs cannot silently drift due to missing runtime fields.
+
+At dispatch time, the orchestrator creates one asynchronous client task per selected agent. All tasks run under explicit timeout control. The gather stage records success, timeout, and parsing status separately, so partial failures still return a valid aggregate response rather than a global 500 error. This behavior proved useful in long benchmark runs where one slow agent should not invalidate an entire repetition batch.
+
+\subsection{Agent Contract}
+Each agent returns a normalized envelope with five essential fields: model id, answer text, latency in milliseconds, token count, and optional confidence metadata. The orchestrator stores raw and normalized answers side by side. Raw text is preserved for audit and debugging, while normalized text drives metric computation. This dual storage model avoids one common reproducibility issue in benchmark pipelines: losing the original model output after aggressive post-processing.
+
+\subsection{Logging and Provenance}
+Every query writes one structured record with:
+\begin{itemize}
+  \item query id and UTC timestamp,
+  \item selected strategy and topic route,
+  \item selected agent ids,
+  \item per-agent latency and token usage,
+  \item aggregate answer and agreement score,
+  \item host resource snapshot at query end.
+\end{itemize}
+
+The same schema is used for interactive and benchmark requests. This decision enables direct comparability between ad hoc manual tests and scripted evaluation runs.
+
+\subsection{Failure Recovery and Guardrails}
+Four guardrails were critical in practice:
+\begin{enumerate}
+  \item endpoint health checks before benchmark launch,
+  \item retry-safe request identifiers at the orchestrator layer,
+  \item deterministic mode for reruns after partial failure,
+  \item explicit rejection when selected model subset is empty.
+\end{enumerate}
+
+Together, these controls reduced wasted benchmark time and made post-failure diagnosis straightforward.
+
+\section{Aggregation Formulation}
+For a prompt $q$, the orchestrator receives a response set
+\begin{equation}
+\mathcal{R}(q)=\{r_1, r_2, \ldots, r_n\},
+\end{equation}
+where each response is
+\begin{equation}
+r_i = (a_i, \ell_i, \tau_i, m_i, c_i).
+\end{equation}
+Here $a_i$ is answer text, $\ell_i$ is latency, $\tau_i$ is token count, $m_i$ is model id, and $c_i$ is a confidence proxy.
+
+The ensemble selects
+\begin{equation}
+\hat{y}=\arg\max_{y\in\mathcal{Y}} S(y\mid\mathcal{R},\Theta),
+\end{equation}
+where $S(\cdot)$ is strategy-specific and $\Theta$ includes weights, routing rules, and deterministic controls.
+
+\subsection{Majority Voting}
+Let $v_i(y)=1$ if agent $i$ outputs normalized answer $y$, else $0$. Majority score:
+\begin{equation}
+S_{\text{maj}}(y)=\sum_{i=1}^{n} v_i(y).
+\end{equation}
+
+\subsection{Dynamic Weighted Voting}
+Weighted score:
+\begin{equation}
+S_{\text{w}}(y)=\sum_{i=1}^{n} w_i\,v_i(y), \quad \sum_i w_i=1,
+\end{equation}
+with online update
+\begin{equation}
+w_i^{(t+1)}=\alpha w_i^{(t)} + (1-\alpha)\,\text{acc}_i^{(t)}.
+\end{equation}
+
+\subsection{Inverse Surprising Popularity}
+Each agent provides a first-order answer and a predicted majority answer. Let $f(y)$ denote observed frequency and $g(y)$ denote predicted-majority frequency. The score is
+\begin{equation}
+S_{\text{isp}}(y)=f(y)-\lambda g(y),
+\end{equation}
+which favors answers supported by direct votes but under-anticipated by second-order belief.
+
+\subsection{Topic-Based Routing}
+A lightweight topic classifier maps prompt $q$ to topic $t\in\mathcal{T}$. A topic-specific subset $\mathcal{A}_t$ is selected, then the chosen base voting rule runs on that subset.
+
+\subsection{Two-Round Debate}
+Round 1 collects independent responses. Round 2 asks each agent to revise after seeing peer summaries. The final vote uses revised answers. This adds interpretability but increases latency.
+
+\subsection{Complexity and Cost Model}
+If the average one-agent inference time is $\bar{\ell}$ and asynchronous overhead is $\epsilon$, direct strategies have wall-clock cost close to
+\begin{equation}
+T_{\text{direct}} \approx \max_i \ell_i + \epsilon.
+\end{equation}
+By contrast, two-round debate requires two coordinated fan-out phases and intermediate synthesis:
+\begin{equation}
+T_{\text{debate}} \approx \max_i \ell_i^{(1)} + \max_i \ell_i^{(2)} + \epsilon'.
+\end{equation}
+This cost model aligns with observed results, where debate latency is substantially above direct strategies. In local deployments, this gap directly affects user-perceived responsiveness and benchmark wall time.
+
+\subsection{Agreement Metrics}
+Let $n$ be number of participating agents and $n^*$ the count supporting the winning answer. Agreement rate is:
+\begin{equation}
+\text{Agreement} = \frac{n^*}{n}.
+\end{equation}
+Agreement is reported together with accuracy because high agreement with low accuracy can indicate consensus drift, while low agreement with high accuracy can indicate fragile correctness.
+
+\section{System Engineering and Runtime Optimization}
+\subsection{Bottlenecks Observed During Deployment}
+Early runs showed three recurring bottlenecks:
+\begin{enumerate}
+  \item repeated model calls across similar strategies,
+  \item unnecessary second debate round when round-1 agreement was already complete,
+  \item excessive output length on small CPU nodes.
+\end{enumerate}
+
+\subsection{Implemented Optimizations}
+The final system applies:
+\begin{itemize}
+  \item \textbf{shared fan-out cache} for direct strategies (majority, weighted, isp, topic),
+  \item \textbf{debate early-stop} when first-round agreement reaches threshold,
+  \item \textbf{token-budget controls} to cap response length under constrained hardware,
+  \item \textbf{normalized answer extraction} to stabilize metric parsing.
+\end{itemize}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.55\columnwidth]{figures/optimization_progress_bar_chart.png}
+  \caption{Runtime profile before and after optimization steps.}
+  \label{fig:opt}
+\end{figure}
+
+\subsection{Deterministic Controls}
+Every benchmark run stores seed, temperature, strategy, selected agents, repetition index, and sample index. Deterministic mode can be enabled per run, which greatly reduces run-to-run variance during ablation.
+
+\section{Experimental Design}
+\subsection{Benchmarks}
+Three public benchmarks are used:
+\begin{itemize}
+  \item MMLU~\cite{mmlu}
+  \item GSM8K~\cite{gsm8k}
+  \item TruthfulQA~\cite{truthfulqa}
+\end{itemize}
+
+\subsection{Protocol}
+For each strategy, benchmark, and repetition:
+\begin{enumerate}
+  \item sample controlled subset,
+  \item execute through \texttt{/query},
+  \item parse normalized final answer,
+  \item log latency, agreement, and resource usage,
+  \item store records in CSV and JSON.
+\end{enumerate}
+
+The primary dependent variables are accuracy, F1, mean latency, latency standard deviation, and agreement rate. Independent variables are strategy type, benchmark set, repetition number, deterministic flag, and token budget.
+
+\subsection{Statistical Analysis}
+Two paired tests are applied to repeated-run score vectors:
+\begin{itemize}
+  \item paired t-test,
+  \item Wilcoxon signed-rank test.
+\end{itemize}
+
+A comparison is treated as statistically meaningful only when both tests satisfy $p<0.05$.
+
+\subsection{Confidence Interval Reporting}
+For each strategy and metric, the mean over repetitions is reported with a 95\% confidence interval:
+\begin{equation}
+\bar{x} \pm t_{0.975,\,n-1}\frac{s}{\sqrt{n}},
+\end{equation}
+where $\bar{x}$ is sample mean, $s$ is sample standard deviation, and $n$ is repetition count. This interval is included in exported JSON records and used in chart annotation during report generation.
+
+\subsection{Variable Isolation}
+To preserve comparability, only one independent variable is changed at a time in controlled runs. For example, when strategy effects are measured, seed, deterministic flag, prompt budget, and benchmark subset remain fixed. The same principle is used when testing runtime optimizations: optimization toggles are changed while strategy and benchmark configuration remain constant.
+
+\subsection{Resource Telemetry}
+Each query log stores CPU utilization, memory utilization, and optional GPU telemetry (if available). Resource traces are not only diagnostic; they are part of interpretation. A strategy that gains minor accuracy at disproportionate compute cost may not be preferable in constrained deployment settings.
+
+\section{Results}
+\subsection{Strategy-Level Summary}
+Table~\ref{tab:agg} summarizes average performance across all benchmark groups.
+
+\begin{table}[t]
+\centering
+\caption{Average metric summary across all benchmark groups.}
+\label{tab:agg}
+\resizebox{\columnwidth}{!}{\input{tables/aggregate_strategy_results.tex}}
+\end{table}
+
+Weighted and ISP both reach the highest average accuracy (0.933) and F1 (0.933), while maintaining latency near 13.5--13.7 seconds. Debate records the highest latency (59.3 seconds average), making it less suitable for interactive settings in this hardware profile.
+
+\subsection{Per-Benchmark Behavior}
+Table~\ref{tab:bench} details benchmark-level breakdown.
+
+\begin{table*}[t]
+\centering
+\caption{Per-benchmark strategy comparison.}
+\label{tab:bench}
+\resizebox{0.96\textwidth}{!}{\input{tables/per_benchmark_results.tex}}
+\end{table*}
+
+On MMLU, all strategies reach 1.0 accuracy in this run configuration, indicating low separation at the chosen sample size. On GSM8K, weighted and ISP outperform majority by +0.2 absolute accuracy. On TruthfulQA, weighted and ISP reach perfect scores in this run, and topic routing also improves over majority.
+
+\subsection{Visual Trends}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.55\columnwidth]{figures/accuracy_bar_chart.png}
+  \caption{Accuracy trend by strategy and benchmark group.}
+  \label{fig:acc}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.55\columnwidth]{figures/latency_line_chart.png}
+  \caption{Latency profile of all strategies across benchmark groups.}
+  \label{fig:lat}
+\end{figure}
+
+Figure~\ref{fig:acc} shows quality gains for weighted and ISP on reasoning-heavy subsets, while Fig.~\ref{fig:lat} confirms debate as the dominant latency outlier.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.55\columnwidth]{figures/accuracy_share_pie_chart.png}
+  \caption{Relative share of average accuracy by strategy.}
+  \label{fig:pie}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.55\columnwidth]{figures/progress_cumulative_accuracy_line.png}
+  \caption{Cumulative progress trend during repeated evaluation runs.}
+  \label{fig:cum}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.55\columnwidth]{figures/overall_accuracy.png}
+  \caption{Overall accuracy comparison across all evaluated strategies.}
+  \label{fig:overallacc}
+\end{figure}
+
+The pie view in Fig.~\ref{fig:pie} offers a compact ranking perspective that is useful for quick system selection in practice. The cumulative trend in Fig.~\ref{fig:cum} is especially valuable during long runs because it reveals whether a strategy is stabilizing or still drifting as more samples are processed. Figure~\ref{fig:overallacc} provides a direct cross-strategy summary for quick operational decisions.
+
+\subsection{Significance Findings}
+The most important paired comparisons are listed in Table~\ref{tab:sig}.
+
+\begin{table*}[t]
+\centering
+\caption{Significance highlights from paired t-test and Wilcoxon signed-rank analysis.}
+\label{tab:sig}
+\resizebox{0.96\textwidth}{!}{\input{tables/significance_highlights.tex}}
+\end{table*}
+
+For GSM8K and TruthfulQA, weighted and ISP significantly outperform majority under both tests. Debate performs significantly below majority on the same sets, despite offering richer cross-agent critique traces.
+
+\subsection{Per-Strategy Operational Profile}
+\textbf{Majority voting} is simple and stable, with the lowest implementation complexity. It is a strong baseline for constrained nodes.
+
+\textbf{Dynamic weighted voting} consistently improved answer quality in this run while preserving latency close to majority. This made it the most balanced strategy for interactive operation.
+
+\textbf{Inverse surprising popularity} matched weighted performance and occasionally recovered correct minority answers that plain majority missed.
+
+\textbf{Topic routing} improved agreement in category-focused prompts, but misclassification in ambiguous prompts introduced small performance fluctuations.
+
+\textbf{Debate} generated richer intermediate traces and made disagreement dynamics visible, but the two-round cost was substantial in CPU-heavy settings.
+
+\section{Operational Lessons}
+\subsection{What Worked Well}
+Three decisions produced the strongest practical gains:
+\begin{enumerate}
+  \item using asynchronous fan-out with strict timeout handling,
+  \item treating strategy code as a pluggable module behind one API contract,
+  \item exporting all benchmark records in machine-readable form before any plotting.
+\end{enumerate}
+
+These decisions reduced regression risk during rapid iteration and made the manuscript pipeline straightforward.
+
+\subsection{What Required Careful Tuning}
+The system required explicit controls in four areas:
+\begin{itemize}
+  \item CORS setup for browser-facing public demo pages,
+  \item health checks for each agent endpoint before benchmark launch,
+  \item prompt normalization for robust numeric answer extraction,
+  \item deterministic flags to limit drift across repeated runs.
+\end{itemize}
+
+\subsection{Scaling to More Agents}
+The architecture scales without algorithm rewrites. New nodes are added by extending the agent configuration list. The orchestrator already supports agent subset selection per query, enabling both full-ensemble and targeted routing runs.
+
+\section{Security and Deployment Hardening}
+\subsection{Network Segmentation}
+All model agents are kept on a private subnet and are not exposed directly to the public internet. Only the orchestrator endpoint is published through a controlled tunnel path. This layout limits blast radius and prevents direct probing of individual model runtimes.
+
+\subsection{Endpoint Protection}
+Deployment guidance includes strict CORS allowlists for browser access, service-level health checks, and least-privilege firewall rules. During testing, permissive CORS was used briefly for connectivity diagnosis, then narrowed to approved origins for normal operation.
+
+\subsection{Credential and Artifact Hygiene}
+Experiment outputs can include prompt and answer text. For this reason, logs are versioned as research artifacts but should be reviewed for sensitive payloads before public release. Access tokens used for repository automation must be short-lived and rotated immediately after use.
+
+The network segmentation and endpoint protection choices above follow the same zero-trust and AI-driven detection principles explored for serverless firewall architectures in~\cite{chowdhury2025serverless,chowdhury2026serverless}, where intrusion detection and cross-cloud security orchestration are combined with least-privilege access control.
+
+\subsection{Service Continuity}
+Systemd units are used for orchestrator and agent auto-start. Health endpoints are polled before launching benchmark batches. This reduced run interruption and prevented partial benchmark folders caused by service restarts.
+
+\section{Reproducibility and Artifact Package}
+\subsection{Generated Outputs}
+Each experiment run generates:
+\begin{itemize}
+  \item CSV summary and raw records,
+  \item JSON result packages,
+  \item PNG figures,
+  \item LaTeX tables for direct paper inclusion.
+\end{itemize}
+
+\subsection{Paper and Web Synchronization}
+The same result files are mirrored into:
+\begin{itemize}
+  \item IEEE manuscript directory,
+  \item Overleaf upload package,
+  \item public web report assets.
+\end{itemize}
+
+This avoids manual copy errors and keeps the public dashboard aligned with manuscript values.
+
+\subsection{Minimal Reproduction Commands}
+\begin{lstlisting}[language=bash,caption={Minimal run sequence for one benchmark pass.},label={lst:repro}]
+curl -s http://127.0.0.1:8000/health
+curl -s http://127.0.0.1:8000/agents
+python run_experiments.py \
+  --orchestrator-url http://127.0.0.1:8000 \
+  --benchmarks mmlu,gsm8k,truthfulqa \
+  --strategies majority,weighted,isp,topic,debate \
+  --repetitions 5 --seed 42 --deterministic
+\end{lstlisting}
+
+\section{Limitations and Future Work}
+Two limitations should be considered when interpreting the current results.
+
+First, benchmark sample counts in rapid-cycle experiments can compress performance variance. Larger evaluation sets will provide tighter confidence intervals and may reveal finer ranking shifts among majority, weighted, and ISP.
+
+Second, the deployed models are compact variants selected for local feasibility. Extending the same architecture to larger parameter scales may change the balance between latency and answer quality.
+
+Future work will focus on three directions: adaptive budget allocation by query difficulty, confidence calibration across heterogeneous models, and richer consensus rules that combine first-order votes with textual rationale quality.
+
+\subsection{Threats to Validity}
+\textbf{Internal validity}: although deterministic controls were applied, normalization rules for open-text answers can still influence exact scoring boundaries on edge cases.
+
+\textbf{Construct validity}: accuracy and F1 capture correctness, but they do not fully reflect response usefulness in long-form or multi-step user tasks.
+
+\textbf{External validity}: the reported latency profile reflects the tested local hardware and model sizes. Different hardware classes or model families may shift the quality-latency frontier.
+
+\textbf{Statistical validity}: repeated trials and paired tests were used, but larger repetition counts would reduce uncertainty further and improve detection power for small strategy differences.
+
+\section{Conclusion}
+This paper presented a complete distributed local ensemble platform for language-model research, from node orchestration through statistical reporting. The system supports five aggregation strategies under one interface, records rich run metadata, and exports publication-ready artifacts automatically.
+
+Across the current benchmark configuration, weighted and inverse surprising popularity delivered the best average quality while keeping latency within interactive bounds for local deployment. Debate provided useful interpretability signals but imposed a large runtime penalty.
+
+The main contribution is not only an algorithm comparison, but a reproducible engineering workflow that links implementation, measurement, significance testing, and manuscript production in one consistent pipeline.
+
+\section*{Acknowledgment}
+The authors thank the Department of Computer and Information Science at Gannon University for infrastructure access and technical feedback during deployment and evaluation.
+
+\balance
+\footnotesize
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

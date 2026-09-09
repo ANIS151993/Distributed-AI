@@ -47,9 +47,10 @@ For a visual explanation of the full research pipeline, watch:
 
 ## Authors
 
-- **Md Anisur Rahman Chowdhury<sup>1*</sup>**, **Kefei Wang<sup>1</sup>**
+- **Md Anisur Rahman Chowdhury<sup>1*</sup>**, **Kefei Wang<sup>2</sup>**
 - **<sup>1</sup>** Dept. of Computer and Information Science, Gannon University, USA
-- Emails: `engr.aanis@gmail.com`, `wang039@gannon.edu`
+- **<sup>2</sup>** Utah Valley University, USA
+- Emails: `engr.aanis@gmail.com`, `kefei.wang@uvu.edu`
 
 ---
 
@@ -460,15 +461,16 @@ Distributed-AI/
 
 ## Authors
 
-**Md Anisur Rahman Chowdhury<sup>1*</sup>**, **Kefei Wang<sup>1</sup>**  
+**Md Anisur Rahman Chowdhury<sup>1*</sup>**, **Kefei Wang<sup>2</sup>**  
 **<sup>1</sup>** Dept. of Computer and Information Science, Gannon University, USA  
-Emails: [engr.aanis@gmail.com](mailto:engr.aanis@gmail.com), [wang039@gannon.edu](mailto:wang039@gannon.edu)
+**<sup>2</sup>** Utah Valley University, USA  
+Emails: [engr.aanis@gmail.com](mailto:engr.aanis@gmail.com), [kefei.wang@uvu.edu](mailto:kefei.wang@uvu.edu)
 
 ---
 
 ## Copyright
 
 Copyright (c) 2026 Md Anisur Rahman Chowdhury and Kefei Wang  
-Emails: engr.aanis@gmail.com, wang039@gannon.edu  
-Affiliation: Dept. of Computer and Information Science, Gannon University, USA  
+Emails: engr.aanis@gmail.com, kefei.wang@uvu.edu  
+Affiliation: Md Anisur Rahman Chowdhury — Dept. of Computer and Information Science, Gannon University, USA; Kefei Wang — Utah Valley University, USA  
 All rights reserved.
