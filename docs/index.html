@@ -15,6 +15,32 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="styles.css?v=20260301-03" />
+  <style>
+    .paper-preview-frame::after {
+      content: none !important;
+      display: none !important;
+    }
+    .paper-preview-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-18deg);
+      padding: 10px 24px;
+      border: 2px solid rgba(185, 28, 28, 0.28);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.45);
+      color: rgba(127, 29, 29, 0.28);
+      font-weight: 700;
+      font-size: clamp(0.95rem, 2.5vw, 1.8rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      pointer-events: none;
+      backdrop-filter: blur(2px);
+      white-space: nowrap;
+      text-align: center;
+      z-index: 2;
+    }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="assets/data/report_data.js"></script>
 </head>
@@ -57,7 +83,7 @@
       <div class="hero-actions">
         <a class="btn btn-primary" href="#playground">Try AI Playground</a>
         <a class="btn btn-primary" href="interactive_dashboard.html">Open Interactive Dashboard</a>
-        <a class="btn" href="#paper">Read the Paper</a>
+        <a class="btn" href="#paper" id="heroPaperGateBtn">Request Protected Paper</a>
         <a class="btn" href="https://github.com/ANIS151993/Distributed-AI">Project GitHub</a>
         <a class="btn" href="https://github.com/ANIS151993">GitHub Profile</a>
       </div>
@@ -368,13 +394,14 @@
 
     <section class="section alt" id="paper">
       <div class="container">
-        <h2>Paper</h2>
+        <h2>Paper Access</h2>
         <p>
-          The full manuscript is publicly available below in PDF, Word, LaTeX, and plain-text formats.
+          Only the public abstract is shown by default. Full manuscript reading and downloads are restricted behind
+          your follow, subscribe, permission-request, and password gate.
         </p>
         <div class="paper-access-grid">
           <div class="playground-card">
-            <h3>Abstract</h3>
+            <h3>Public Abstract</h3>
             <p>
               This project presents a complete local distributed AI network in which one FastAPI orchestrator
               routes prompts to four local Ollama-based LLM agents, aggregates answers with multiple ensemble
@@ -384,33 +411,95 @@
               intervals, paired t-tests, and Wilcoxon signed-rank tests. All outputs are exported as CSV, JSON,
               PNG figures, and IEEE LaTeX tables, with an accompanying manuscript package for conference submission.
             </p>
+            <div class="paper-gate-note">
+              <strong>Restricted Access Policy</strong>
+              <p class="muted">
+                Visitors must follow my GitHub, subscribe to my YouTube channel, send a permission request,
+                and then enter the approved access password to download the manuscript (PDF, DOCX, LaTeX, TXT,
+                and the full Overleaf project ZIP).
+              </p>
+            </div>
           </div>
 
           <div class="playground-card">
-            <h3>Download Manuscript</h3>
+            <h3>Unlock Manuscript Downloads</h3>
             <div class="paper-step-links">
-              <a class="btn btn-primary" href="assets/paper/IEEE_Distributed_AI_Ensemble.pdf">Download PDF</a>
-              <a class="btn" href="assets/paper/IEEE_Distributed_AI_Ensemble.docx">Download DOCX</a>
-              <a class="btn" href="assets/paper/IEEE_Distributed_AI_Ensemble.tex">Download LaTeX</a>
-              <a class="btn" href="assets/paper/IEEE_Distributed_AI_Ensemble.txt">Download TXT</a>
-              <a class="btn" href="assets/paper/IEEE_Distributed_AI_Ensemble_Overleaf.zip">Download Overleaf Project (ZIP)</a>
+              <a class="btn" href="https://github.com/ANIS151993" target="_blank" rel="noreferrer">1. Follow GitHub</a>
+              <a class="btn" href="https://youtu.be/Zybs0Omg600" target="_blank" rel="noreferrer">2. Subscribe YouTube</a>
+              <a
+                class="btn"
+                href="mailto:engr.aanis@gmail.com?subject=Paper%20Access%20Request&body=Hello%2C%20I%20would%20like%20permission%20to%20read%20and%20download%20the%20full%20paper."
+              >
+                3. Send Permission Request
+              </a>
             </div>
+
+            <div class="paper-checklist">
+              <label class="checkbox-row">
+                <input type="checkbox" id="paperRuleGithub" />
+                I followed the GitHub account.
+              </label>
+              <label class="checkbox-row">
+                <input type="checkbox" id="paperRuleYoutube" />
+                I subscribed to the YouTube channel.
+              </label>
+              <label class="checkbox-row">
+                <input type="checkbox" id="paperRulePermission" />
+                I sent the permission request.
+              </label>
+            </div>
+
+            <label for="paperAccessPassword">Access Password</label>
+            <input
+              id="paperAccessPassword"
+              type="password"
+              placeholder="Enter the approved paper access password"
+              autocomplete="off"
+            />
+
+            <div class="paper-access-actions">
+              <button class="btn btn-primary" type="button" id="unlockPaperBtn">Unlock Paper</button>
+              <button class="btn" type="button" id="lockPaperBtn">Lock Again</button>
+            </div>
+
+            <p id="paperAccessStatus" class="muted">
+              Complete all three steps, then enter the approved password to unlock the manuscript downloads.
+            </p>
             <p class="muted">
-              All manuscript files are open for reading and download, no sign-in or password required.
-              The Overleaf ZIP contains the full project source: LaTeX file, <code>references.bib</code>,
-              all figures, and all tables, ready to upload directly to a new Overleaf project.
+              Access is stored only for this browser session.
             </p>
           </div>
         </div>
 
         <div class="paper-preview-card">
-          <h3>Paper Preview: First Page</h3>
+          <h3>Paper Preview: First Page Only</h3>
+          <p class="muted">
+            This public preview shows only the first page of the manuscript. Full access remains protected.
+          </p>
           <div class="paper-preview-frame">
             <img
               src="assets/paper/IEEE_Distributed_AI_Ensemble_First_Page.jpg"
               alt="First page preview of the research paper"
               loading="lazy"
             />
+            <div class="paper-preview-watermark">MD ANISUR RAHMAN CHOWDHURY</div>
+          </div>
+        </div>
+
+        <div class="paper-protected-panel" id="paperProtectedPanel" hidden>
+          <div class="paper-downloads">
+            <a class="btn btn-primary" id="paperDownloadPdf" href="#paper">Download PDF</a>
+            <a class="btn" id="paperDownloadDocx" href="#paper">Download DOCX</a>
+            <a class="btn" id="paperDownloadTex" href="#paper">Download LaTeX</a>
+            <a class="btn" id="paperDownloadTxt" href="#paper">Download TXT</a>
+            <a class="btn" id="paperDownloadZip" href="#paper">Download Overleaf Project (ZIP)</a>
+          </div>
+          <div class="paper-gate-note">
+            <strong>Unlocked File Delivery</strong>
+            <p class="muted">
+              These links are only active for this browser session after a successful password check. Reloading
+              or opening this page in another browser will require unlocking again.
+            </p>
           </div>
         </div>
       </div>
@@ -462,7 +551,7 @@
           <a href="https://github.com/ANIS151993/Distributed-AI/blob/main/README.md">Project README</a>
           <a href="interactive_dashboard.html">Interactive Dashboard</a>
           <a href="#playground">Live Playground</a>
-          <a href="#paper">Read the Paper</a>
+          <a href="#paper">Request Protected Paper Access</a>
           <a href="https://github.com/ANIS151993/Distributed-AI/blob/main/paper/README.md">Paper Build Guide</a>
           <a href="assets/results/overall_summary.csv">Overall Summary (CSV)</a>
           <a href="assets/results/overall_summary.json">Overall Summary (JSON)</a>

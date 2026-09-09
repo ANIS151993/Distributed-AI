@@ -15,8 +15,10 @@ This folder contains the manuscript source and the public distribution files.
 
 ## Public Distribution Policy
 
-The manuscript is published openly in this repository as plain `.pdf`, `.docx`, `.tex`, and `.txt` files.
-No access gate, password, or encryption is applied.
+These files sit in the repository as plain `.pdf`, `.docx`, `.tex`, and `.txt` files (plus the Overleaf ZIP),
+but the public site at `docs/index.html` gates the download links behind a follow-GitHub, subscribe-YouTube,
+send-permission-request, and password unlock flow. Readers going through the public portal must complete that
+flow before the download buttons become active.
 
 ## Rebuild the Manuscript
 

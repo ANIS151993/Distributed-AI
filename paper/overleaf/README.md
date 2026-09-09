@@ -14,7 +14,9 @@ This folder mirrors the manuscript files for direct upload to Overleaf.
 
 ## Public Access Note
 
-These manuscript files are published openly in this repository, with no access gate or encryption.
+These files sit in the repository directly, but the public site gates the corresponding download links
+(including the Overleaf ZIP) behind a follow-GitHub, subscribe-YouTube, send-permission-request, and
+password unlock flow at `docs/index.html#paper`.
 
 ## Notes
 
